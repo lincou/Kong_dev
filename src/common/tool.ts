@@ -117,7 +117,7 @@ export const merge = (object, ...sources) => {
 }
 
 export function deepClone<T>(obj: T): T {
-	if (!obj && typeof obj !== "object") {
+	if (!obj || typeof obj !== "object") {
 		throw new Error("error arguments deepClone");
 	}
 	const targetObj = obj.constructor === Array ? [] : {};

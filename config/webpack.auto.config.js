@@ -4,6 +4,10 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const AutoProWebpackPlugin = require('@auto.pro/webpack-plugin')
 const ProgressPlugin = require('progress-bar-webpack-plugin')
 const Unpack = require('./devUnpack')
+const ESLintWebpackPlugin = require('eslint-webpack-plugin')
+const DevServer = require('./devServer')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 
 const dictionary = []
 for (let i = 1024; i < 2048; i++) {
@@ -71,16 +75,30 @@ const config = {
 module.exports = (env, argv) => {
     if (argv.mode === 'development') {
         config.plugins = [
+            new ESLintWebpackPlugin({
+                extensions: ['ts'],
+                // fix: true, // 自动修复
+
+            }),
             new CleanWebpackPlugin({
                 cleanOnceBeforeBuildPatterns: [__dirname + '/../dist/auto.js']
             }),
             compilePlugin,
             new ProgressPlugin(),
+            new CopyWebpackPlugin({
+                patterns: [
+                    { from: path.resolve(__dirname, '../node_modules/assttyys_ui/dist/index.html'), to: '.' },
+                ]
+            }),
             new Unpack(),
+            new DevServer(),
         ]
         // config.devtool = 'source-map'
     } else {
         config.plugins = [
+            new ESLintWebpackPlugin({
+                extensions: ['ts'],
+            }),
             new CleanWebpackPlugin({
                 cleanOnceBeforeBuildPatterns: [__dirname + '/../dist/auto.js'],
             }),
@@ -94,7 +112,12 @@ module.exports = (env, argv) => {
             //     stringArrayEncoding: ['rc4'],
             // }),
             compilePlugin,
-            new ProgressPlugin()
+            new ProgressPlugin(),
+            new CopyWebpackPlugin({
+                patterns: [
+                    { from: path.resolve(__dirname, '../node_modules/assttyys_ui/dist/index.html'), to: '.' },
+                ]
+            }),
         ]
     }
 

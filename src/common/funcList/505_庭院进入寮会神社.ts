@@ -1,5 +1,5 @@
 import { IFuncOrigin, IFuncOperatorOrigin } from '@/interface/IFunc';
-const normal = -1; //定义常量
+// const normal = -1; //定义常量
 const left = 0;
 const center = 1;
 const right = 2;
@@ -17,9 +17,9 @@ export class Func505 implements IFuncOrigin {
 	}, { // 点击阴阳寮
 		desc: [1280, 720,
 			[[center, 560, 608, 0xbc3433],
-			[center, 542, 639, 0x7b1515],
-			[center, 575, 646, 0xc1b8b0],
-			[center, 590, 638, 0xb07970]]
+				[center, 542, 639, 0x7b1515],
+				[center, 575, 646, 0xc1b8b0],
+				[center, 590, 638, 0xb07970]]
 		],
 		oper: [
 			[center, 1280, 720, 544, 612, 594, 661, 1200]	// 点击阴阳寮
@@ -37,7 +37,7 @@ export class Func505 implements IFuncOrigin {
 			[center, 1280, 720, 544, 612, 594, 661, 1200]	// 点击阴阳寮
 		]
 	}, { // 判断是否为寮首页
-		desc:  [
+		desc: [
 			1280, 720,
 			[
 				[right, 1096, 630, 0xb1251f],
@@ -47,9 +47,10 @@ export class Func505 implements IFuncOrigin {
 			]
 		],
 		oper: [
-			[center, 1280, 720, 868,627, 927,684, 1200]	// 点击下方神社
-		]
-	},	{ // 判断是否为神社页面
+			[center, 1280, 720, 868, 627, 927, 684, 1200]	// 点击下方神社
+		],
+		retest: 1000
+	}, { // 判断是否为神社页面
 		desc: [
 			1280, 720,
 			[
@@ -61,6 +62,40 @@ export class Func505 implements IFuncOrigin {
 		],
 		oper: [
 			[right, 1280, 720, 1166, 362, 1216, 453, 1200]	//  点击右侧神社分页签
+		]
+	}, { // 判断种树是否升级
+		desc: [1280, 720,
+			[
+				[left, 38, 38, 0x4c4838],
+				[left, 125, 32, 0x4a4636],
+				[left, 134, 54, 0x4a462d],
+				[center, 795, 655, 0x433a2d],
+				[right, 984, 651, 0x45453f],
+				[right, 1211, 639, 0x4c4c4b],
+				[center, 324, 661, 0x453a2e],
+				[center, 795, 108, 0xe6ca93],
+				[center, 805, 100, 0xdbc690]
+			]
+		],
+		oper: [
+			[right, 1280, 720, 777, 89, 811, 126, 1200]	//  点击关闭种树升级弹窗
+		]
+	}, { // 判断种树合影弹窗
+		desc: [1280, 720,
+			[
+				[left, 38, 38, 0x4c4838],
+				[left, 125, 32, 0x4a4636],
+				[left, 134, 54, 0x4a462d],
+				[center, 795, 655, 0x433a2d],
+				[right, 984, 651, 0x45453f],
+				[right, 1211, 639, 0x4c4c4b],
+				[center, 324, 661, 0x453a2e],
+				[right, 967, 211, 0xe2c990],
+				[right, 977, 201, 0xd6c78c]
+			]
+		],
+		oper: [
+			[right, 1280, 720, 949, 191, 984, 230, 1200]	//  点击关闭种树合影弹窗
 		]
 	}]
 }

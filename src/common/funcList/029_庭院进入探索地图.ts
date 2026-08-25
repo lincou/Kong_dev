@@ -1,8 +1,8 @@
 import { Script } from '@/system/script';
 import { IFuncOrigin, IFuncOperatorOrigin, IFuncOperator } from '@/interface/IFunc';
-const normal = -1; //定义常量
-const left = 0;
-const center = 1;
+// const normal = -1; //定义常量
+// const left = 0;
+// const center = 1;
 const right = 2;
 
 export class Func029 implements IFuncOrigin {
@@ -13,16 +13,10 @@ export class Func029 implements IFuncOrigin {
 		// 庭院未打开菜单
 		desc: '页面是否为庭院_菜单未展开_只支持默认庭院皮肤与默认装饰',
 		oper: [
-			[left, 1280, 720, 0, 0, 32, 63, 1000]
+			[right, 1280, 720, 0, 0, 32, 63, 1200]
 		]
 	}, { // 庭院已打开菜单
 		desc: '页面是否为庭院_菜单已展开_只支持默认庭院皮肤与默认装饰'
-	}, {
-		// 庭院已打开菜单，另外一种图标
-		desc: '页面是否为庭院_菜单已展开_另一种图标_御祝图标_只支持默认庭院皮肤与默认装饰'
-	}, {
-		// 庭院已打开菜单，另另外一种图标
-		desc: '庭院已打开菜单_另另外一种图标'
 	}]
 	operatorFunc(thisScript: Script, thisOperator: IFuncOperator[]): boolean {
 		if (thisScript.oper({
@@ -31,15 +25,11 @@ export class Func029 implements IFuncOrigin {
 				desc: thisOperator[0].desc
 			}, {
 				desc: thisOperator[1].desc
-			}, {
-				desc: thisOperator[2].desc
-			}, {
-				desc: thisOperator[3].desc
 			}]
 		})) {
-			let point = thisScript.findMultiColor('庭院_探索灯笼');
+			const point = thisScript.findMultiColor('庭院_探索灯笼');
 			if (point) {
-				let oper = [
+				const oper = [
 					[point.x, point.y, point.x + thisOperator[0].oper[0][2], point.y + thisOperator[0].oper[0][3], thisOperator[0].oper[0][4]]
 				];
 				thisScript.regionClick(oper);

@@ -1,9 +1,9 @@
 import { IFuncOrigin, IFuncOperatorOrigin, IFuncOperator } from '@/interface/IFunc';
 import { Script } from '@/system/script';
-const normal = -1; //定义常量
+// const normal = -1; //定义常量
 const left = 0;
 const center = 1;
-const right = 2;
+// const right = 2;
 
 export class Func994 implements IFuncOrigin {
 	id = 994;
@@ -33,12 +33,14 @@ export class Func994 implements IFuncOrigin {
 		}]
 	}];
 	operator: IFuncOperatorOrigin[] = [{
-		desc: 	// 寄养界面_判断
+		desc: // 0 已适配66 寄养界面_判断
 			[1280, 720,
-				[[left, 186, 171, 0x30221f],
-				[center, 555, 138, 0xcbb59e],
-				[center, 880, 562, 0xf4b25f],
-				[center, 705, 347, 0xccb59e]]
+				[
+					[left, 188, 172, 0x352721],
+					[center, 555, 138, 0xcbb59e],
+					[center, 880, 562, 0xf4b25f],
+					[center, 705, 347, 0xccb59e]
+				]
 			],
 		oper: [
 			[center, 1280, 720, 221, 558, 611, 590, 0],	// 滑动起点
@@ -46,59 +48,67 @@ export class Func994 implements IFuncOrigin {
 			// [center, 1280, 720, 1188,115, 1225,151, 500],
 		]
 	}, {
-		desc:	// 是否为好友列表底部
+		desc:	// 1 是否为好友列表底部
 			[1280, 720,
-				[[left, 186, 171, 0x30221f],
-				[center, 555, 138, 0xcbb59e],
-				[center, 880, 562, 0xf4b25f],
-				[center, 705, 347, 0xccb59e],
-				[left, 186, 522, 0xbe9c69],
-				[left, 271, 146, 0xe9c89e]]
+				[
+					[left, 188, 172, 0x352721],
+					[center, 555, 138, 0xcbb59e],
+					[center, 880, 562, 0xf4b25f],
+					[center, 705, 347, 0xccb59e],
+					[left, 186, 522, 0xbe9c69],
+					[left, 271, 146, 0xe9c89e]
+				]
 			],
 		oper: [
 			[center, 1280, 720, 344, 101, 440, 152, 5000],  // 点击跨区页签
 		]
 	}, {
-		desc:	// 是否为跨区列表底部
+		desc:	// 2 是否为跨区列表底部
 			[1280, 720,
-				[[left, 186, 171, 0x30221f],
-				[center, 555, 138, 0xcbb59e],
-				[center, 880, 562, 0xf4b25f],
-				[center, 705, 347, 0xccb59e],
-				[left, 186, 522, 0xbe9c69],
-				[left, 271, 146, 0xa46c4d]]
+				[
+					[left, 188, 172, 0x352721],
+					[center, 555, 138, 0xcbb59e],
+					[center, 880, 562, 0xf4b25f],
+					[center, 705, 347, 0xccb59e],
+					[left, 186, 522, 0xbe9c69],
+					[left, 271, 146, 0xa46c4d]
+				]
 			],
 		oper: [
 			[center, 1280, 720, 222, 100, 321, 149, 5000],  // 点击好友页签
 		]
 	}, {
-		desc:	// 是否为好友列表
+		desc:	// 3 已适配66 是否为好友列表
 			[1280, 720,
-				[[left, 186, 171, 0x30221f],
-				[center, 555, 138, 0xcbb59e],
-				[center, 880, 562, 0xf4b25f],
-				[center, 705, 347, 0xccb59e],
-				[left, 271, 146, 0xe9c89e]]
+				[
+					[left, 188, 172, 0x352721],
+					[center, 555, 138, 0xcbb59e],
+					[center, 880, 562, 0xf4b25f],
+					[center, 705, 347, 0xccb59e],
+					[left, 271, 146, 0xe9c89e]
+				]
 			],
-	},	{
-		desc:	// 是否为跨区列表
+	}, {
+		desc:	// 已适配66 是否为跨区列表
 			[1280, 720,
-				[[left, 186, 171, 0x30221f],
-				[center, 555, 138, 0xcbb59e],
-				[center, 880, 562, 0xf4b25f],
-				[center, 705, 347, 0xccb59e],
-				[left, 271, 146, 0xa46c4d]]
+				[
+					[left, 188, 172, 0x352721],
+					[center, 555, 138, 0xcbb59e],
+					[center, 880, 562, 0xf4b25f],
+					[center, 705, 347, 0xccb59e],
+					[left, 271, 146, 0xa46c4d]
+				]
 			],
 	}];
 	operatorFunc(thisScript: Script, thisOperator: IFuncOperator[]): boolean {
-		let thisConf = thisScript.scheme.config['994'];
-		let defaultCount = +thisConf.count * 2;	// 共有两个页签
+		const thisConf = thisScript.scheme.config['994'];
+		const defaultCount = +thisConf.count * 2;	// 共有两个页签
 		if (thisScript.oper({
 			id: 994,
 			name: '寄养界面_判断',
 			operator: [{ desc: thisOperator[0].desc }]
 		})) {
-			thisScript.regionBezierSwipe(thisOperator[0].oper[0], thisOperator[0].oper[1], [200, 250], 0, 200);
+			thisScript.regionBezierSwipe(thisOperator[0].oper[0], thisOperator[0].oper[1], [200, 250], 200);
 			if (!thisScript.global.jy_list_swipe_times) {
 				thisScript.global.jy_list_swipe_times = 0;
 			}
@@ -106,8 +116,8 @@ export class Func994 implements IFuncOrigin {
 			const findOccupyColor = '式神寄养_全列表被占用';
 			const findEmptyColor = '式神寄养_全列表空结界卡';
 
-			let occupyPoint = thisScript.findMultiColor(findOccupyColor);
-			let emptyPoint = thisScript.findMultiColor(findEmptyColor);
+			const occupyPoint = thisScript.findMultiColor(findOccupyColor);
+			const emptyPoint = thisScript.findMultiColor(findEmptyColor);
 
 			if (occupyPoint || emptyPoint) {
 				console.log(`全列表被占用: ${occupyPoint}`, `全列表空结界卡: ${emptyPoint}`);

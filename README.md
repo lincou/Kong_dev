@@ -3,13 +3,14 @@ ASISTTANT YYS NEXT GENERATION<br/>
 仅作学习用途，请勿用于其他非法途径！<br/>
 欢迎在issue中提出bug与建议，也欢迎有能力的同学加入开发与维护的队列中来<br/>
 ![GitHub](https://img.shields.io/github/license/zzliux/assttyys_autojs)
-[![group:864842180](https://img.shields.io/badge/group-864842180-blue)](https://qm.qq.com/q/H852T6N0OG)
+[![Q群:点击入群](https://img.shields.io/badge/Q群-点击入群-blue)](https://qm.qq.com/q/cAbNMI25UI)
 
 
 # 分辨率支持情况
 脚本开发分辨率为 720 * 1280 该分辨率的横屏或竖屏均能兼容，其他分辨率兼容原理见 <https://gitee.com/yiszza/ScriptLib> 中 README 所提到的锚点比色 与 多点找色，开发分辨率得到的相关坐标点都会在运行分辨率上进行一次缩放与位移，但未测试过其他分辨率，因目前大多真机都是异型屏，阴阳师对异型屏有特殊优化，导致几乎所有异型屏都不支持锚点比色做阴阳师的多分辨率兼容，建议使用配合虚拟机或云手机使用。
 
 # 目录说明
+前端已从本项目分离，见 [zzliux/assttyys_ui](https://github.com/zzliux/assttyys_ui)
 ```
 assttyys_autojs
 ├─assets                                       资源目录，不经过webpack打包，运行时可加载该目录下的文件
@@ -43,8 +44,6 @@ assttyys_autojs
 │  │          003.悬赏协作.ts
 │  │          004_接受邀请.ts
 │  │          ...
-│  ├─mock                                      前端模拟数据
-│  │      promptMock.ts
 │  ├─system                                    aj端目录
 │  │  │  drawFloaty.ts                         悬浮绘制模块
 │  │  │  helperBridge.ts                       操作模块，集成scriptlib以及点击等操作
@@ -60,21 +59,6 @@ assttyys_autojs
 │  │          funcList.ts
 │  │          index.ts
 │  │          ...
-│  └─templateV3
-│     │  App.vue
-│     │  index.html
-│     │  index.js
-│     ├─assets                                  前端静态资源
-│     ├─components                              前端组件
-│     │      AppListLaunchDialog.vue
-│     │      AppListRefDialog.vue
-│     │      FuncConfigBox.vue
-│     │      FuncConfigDialog.vue
-│     └─pages                                   前端页面
-│              About.vue
-│              FuncList.vue
-│              SchemeList.vue
-│              Settings.vue
 ├─test                                          测试目录，里面有乱七八糟的测试用的文件
 |  ...                                          待补充
 ```
@@ -82,7 +66,7 @@ assttyys_autojs
 # 特别鸣谢
 感谢下面几位dalao的顶力支持，在本项目的开发过程中提出的需求均能快速响应与采纳！
 - [yiszza](https://gitee.com/yiszza)
-  - [ScriptLib](https://gitee.com/yiszza/ScriptLib)：基于Auto.ts的高性能比色找色库，本项目的所有多点比色和多点找色均基于AnchorGraphicHelper完成
+  - [ScriptLib](https://gitee.com/yiszza/ScriptLib)：基于Auto.js的高性能比色找色库，本项目的所有多点比色和多点找色均基于AnchorGraphicHelper完成
   - [综合图色助手](https://gitee.com/yiszza/ScriptGraphicHelper)：一款简单好用的图色助手, 快速生成多种脚本开发工具的图色格式代码
 - [molysama](https://github.com/molysama)
   - [@auto.pro](https://github.com/molysama/auto.pro)的提供者，本项目基于该框架完成

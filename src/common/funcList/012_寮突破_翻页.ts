@@ -1,10 +1,10 @@
 import { Script } from '@/system/script';
 import { IFuncOrigin, IFuncOperatorOrigin, IFuncOperator } from '@/interface/IFunc';
 
-const normal = -1; //定义常量
-const left = 0;
+// const normal = -1; //定义常量
+// const left = 0;
 const center = 1;
-const right = 2;
+// const right = 2;
 
 export class Func012 implements IFuncOrigin {
 	id = 12;
@@ -36,19 +36,19 @@ export class Func012 implements IFuncOrigin {
 	operator: IFuncOperatorOrigin[] = [{
 		desc: '突破界面_寮',
 		oper: [
-			[center, 1280, 720, 428,592, 1071,643, 0],
-			[center, 1280, 720, 431,234, 1064,318, 0],
-			[center, 1280, 720, 1188,115, 1225,151, 500],
+			[center, 1280, 720, 428, 592, 1071, 643, 0],
+			[center, 1280, 720, 431, 234, 1064, 318, 0],
+			[center, 1280, 720, 1188, 115, 1225, 151, 500],
 		]
 	}];
 	operatorFunc(thisScript: Script, thisOperator: IFuncOperator[]): boolean {
-		let thisConf = thisScript.scheme.config['12'];
-		let defaultCount = +thisConf.count;
+		const thisConf = thisScript.scheme.config['12'];
+		const defaultCount = +thisConf.count;
 		if (thisScript.oper({
 			name: '突破界面_判断',
 			operator: [{ desc: thisOperator[0].desc }]
 		})) {
-			thisScript.regionBezierSwipe(thisOperator[0].oper[0], thisOperator[0].oper[1], [800, 1600], 0, 200);
+			thisScript.regionBezierSwipe(thisOperator[0].oper[0], thisOperator[0].oper[1], [800, 1600], 200);
 			if (!thisScript.global.tp_swipe_times) {
 				thisScript.global.tp_swipe_times = 0;
 			}
@@ -59,7 +59,7 @@ export class Func012 implements IFuncOrigin {
 					thisScript.doPush(thisScript, { text: `[${thisScript.schemeHistory.map(item => item.schemeName).join('、')}]已停止，请查看。`, before() { thisScript.myToast('脚本即将停止，正在上传数据'); } });
 					thisScript.stop();
 				} else if ('切换方案' === thisConf.afterCountOper) {
-					let oper = thisOperator[0].oper[2];
+					const oper = thisOperator[0].oper[2];
 					thisScript.regionClick([oper], 500 + +thisScript.scheme.commonConfig.afterClickDelayRandom);
 					thisScript.rerun(thisConf.next_scheme);
 				}

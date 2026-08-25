@@ -1,7 +1,7 @@
-import { IFuncOrigin, IFuncOperatorOrigin, IFuncOperator } from "@/interface/IFunc";
-import { Script } from "@/system/script";
+import { IFuncOrigin, IFuncOperatorOrigin, IFuncOperator } from '@/interface/IFunc';
+import { Script } from '@/system/script';
 
-const normal = -1; //定义常量
+// const normal = -1; //定义常量
 const left = 0;
 const center = 1;
 const right = 2;
@@ -28,8 +28,8 @@ export class Func002 implements IFuncOrigin {
 			type: 'scheme',
 			default: '关闭BUFF',
 		}, {
-			name: 'mini_area_click',
-			desc: '是否缩小区域点击，解决部分掉落过多时点击错误的问题',
+			name: 'fail',
+			desc: '失败后切换方案',
 			type: 'switch',
 			default: false,
 		}]
@@ -38,30 +38,31 @@ export class Func002 implements IFuncOrigin {
 		// 调整优先级，提高识别贪吃鬼的级别
 		// 0 左上角的贪吃鬼图标
 		desc: '退出结算_左上角贪吃鬼',
-		oper: [
-			[right, 1280, 720, 1201, 102, 1278, 621, 400],
+		operStepRandom: [
+			[
+				[center, 1280, 720, 15, 139, 83, 309, 1000, 25], // 最后一个参数，表示执行这个的概率(已废弃)
+				[center, 1280, 720, 12, 391, 93, 548, 1000, 25],
+				[center, 1280, 720, 1202, 140, 1267, 630, 1000, 50],
+			]
 		],
-		// operStepRandom: [
-		// 	[
-		// 		[left, 1280, 720, 69, 171, 170, 452, 400, 2],
-		// 		[right, 1280, 720, 1104, 72, 1200, 528, 400, 5],
-		// 	]
-		// ],
 	}, {
 		// 1 左上角贪吃鬼，mumu截图
 		desc: '退出结算_左上角贪吃鬼_mumu',
-		oper: [
-			[right, 1280, 720, 1201, 102, 1278, 621, 400],
+		operStepRandom: [
+			[
+				[center, 1280, 720, 15, 139, 83, 309, 1000, 25], // 最后一个参数，表示执行这个的概率(已废弃)
+				[center, 1280, 720, 12, 391, 93, 548, 1000, 25],
+				[center, 1280, 720, 1202, 140, 1267, 630, 1000, 50],
+			]
 		],
 	}, {
 		// 2 已打开的达摩，取点比较高
 		desc: '退出结算_已打开的达摩_1',
 		operStepRandom: [
 			[
-				[center, 1280, 720, 537, 401, 1244, 612, 300, 5],
-				[center, 1280, 720, 1063, 56, 1226, 685, 300, 5],
-				[center, 1280, 720, 24, 515, 537, 616, 300, 5],
-				[center, 1280, 720, 94, 136, 219, 606, 300, 5],
+				[center, 1280, 720, 15, 139, 83, 309, 1000, 25], // 最后一个参数，表示执行这个的概率(已废弃)
+				[center, 1280, 720, 12, 391, 93, 548, 1000, 25],
+				[center, 1280, 720, 1202, 140, 1267, 630, 1000, 50],
 			]
 		],
 		retest: 300
@@ -69,8 +70,9 @@ export class Func002 implements IFuncOrigin {
 		desc: '退出结算_已打开的达摩_2',
 		operStepRandom: [
 			[
-				[left, 1280, 720, 69, 171, 170, 452, 300, 2], // 最后一个参数，表示执行这个的概率
-				[right, 1280, 720, 1104, 72, 1200, 528, 300, 5],
+				[center, 1280, 720, 15, 139, 83, 309, 1000, 25], // 最后一个参数，表示执行这个的概率(已废弃)
+				[center, 1280, 720, 12, 391, 93, 548, 1000, 25],
+				[center, 1280, 720, 1202, 140, 1267, 630, 1000, 50],
 			]
 		],
 		retest: 300
@@ -79,17 +81,18 @@ export class Func002 implements IFuncOrigin {
 		desc: '退出结算_已打开的达摩_3',
 		operStepRandom: [
 			[
-				[left, 1280, 720, 69, 171, 170, 452, 300, 2], // 最后一个参数，表示执行这个的概率
-				[right, 1280, 720, 1104, 72, 1200, 528, 300, 5],
+				[center, 1280, 720, 15, 139, 83, 309, 1000, 25], // 最后一个参数，表示执行这个的概率(已废弃)
+				[center, 1280, 720, 12, 391, 93, 548, 1000, 25],
+				[center, 1280, 720, 1202, 140, 1267, 630, 1000, 50],
 			]
 		],
 		retest: 300
 	}, {
 		// 5 邀请好友确认
-		desc: '退出结算_邀请好友确认',
+		desc: '退出结算_取消确认框_未勾',
 		oper: [
 			[center, 1280, 720, 550, 347, 730, 376, 300],
-			[center, 1280, 720, 680, 411, 838, 452, 1000],
+			[center, 1280, 720, 680, 411, 838, 452, 500],
 		],
 		notForCnt: true, // 点击确认不统计退出结算的次数
 	}, {
@@ -101,9 +104,14 @@ export class Func002 implements IFuncOrigin {
 				[center, 1280, 720, 165, 60, 1263, 530, 400, 1],
 			]
 		],
-		notForCnt: true,
 	}, {
-		// 7 组队-胜利太鼓,斗技-胜利太鼓
+		// 7 组队-胜利太鼓,斗技-胜利太鼓 - 适配
+		desc: '退出结算_斗技_胜利太鼓',
+		oper: [
+			[center, 1280, 720, 705, 601, 1026, 700, 400],
+		],
+	}, {
+		// 8 组队-胜利太鼓,斗技-胜利太鼓
 		desc: '退出结算_组队_胜利太鼓',
 		operStepRandom: [
 			[
@@ -112,65 +120,26 @@ export class Func002 implements IFuncOrigin {
 				[center, 1280, 720, 888, 359, 1204, 492, 400, 5],
 			]
 		],
-		notForCnt: true,
-	},
-	{
-		// 8 组队-胜利太鼓,斗技-胜利太鼓 - 适配
-		desc: '退出结算_斗技_胜利太鼓',
-		operStepRandom: [
-			[
-				[center, 1280, 720, 124, 60, 1188, 363, 400, 5],
-				[center, 1280, 720, 90, 380, 380, 580, 400, 5],
-				[center, 1280, 720, 888, 359, 1204, 492, 400, 5],
-			]
-		],
-		notForCnt: true,
-	}
-		/*, { // 未打开的达摩
-				desc: [1280, 720,
-					[[center, 667, 377, 0xba4618],
-					[center, 678, 316, 0x080808],
-					[center, 589, 314, 0x060606],
-					[center, 636, 324, 0xe7e1cf],
-					[center, 588, 486, 0x330202]]
-				],
-				oper: [
-					[center, 1280, 720, 153,60, 1202,614, 800],
-				],
-				notForCnt: true,
-			}, { // 未打开的达摩
-				desc: [1280,720,
-					[[center,667,377,0xd35e2c],
-					[center,678,316,0x171614],
-					[center,589,314,0x1b1a16],
-					[center,636,324,0xfffae4],
-					[center,588,486,0x340303]]
-				],
-				oper: [
-					[center, 1280, 720, 153,60, 1202,614, 800],
-				],
-				notForCnt: true,
-			}*/
-		, {
-		// 单人-失败太鼓
+	}, {
+		// 9 单人-失败太鼓
 		desc: '退出结算_单人_失败太鼓',
 		operStepRandom: [
 			[
-				[left, 1280, 720, 69, 171, 170, 452, 2000, 2],
+				[left, 1280, 720, 69, 171, 170, 320, 2000, 2],
 				[right, 1280, 720, 1104, 72, 1200, 528, 2000, 5],
 			]
 		],
 	}, {
-		// 组队-失败太鼓
+		// 10 组队-失败太鼓
 		desc: '退出结算_组队_失败太鼓',
 		operStepRandom: [
 			[
-				[left, 1280, 720, 69, 171, 170, 452, 2000, 2],
+				[left, 1280, 720, 69, 171, 170, 320, 2000, 2],
 				[right, 1280, 720, 1104, 72, 1200, 528, 2000, 5],
 			]
 		],
 	}, {
-		// 左上角的统计图标
+		// 11 左上角的统计图标
 		desc: '退出结算_左上角统计图标',
 		operStepRandom: [
 			[
@@ -178,23 +147,22 @@ export class Func002 implements IFuncOrigin {
 				[left, 1280, 720, 600, 672, 1216, 712, 400, 5],
 			]
 		],
-		notForCnt: true,
 	}, {
-		// 秘闻的胜利，太鼓位置很高
+		// 12 秘闻的胜利，太鼓位置很高
 		desc: '退出结算_秘闻_胜利太鼓',
 		oper: [
 			[center, 1280, 720, 96, 53, 1177, 210, 1000],
 		],
 		retest: 300,
 	}, {
-		// 御魂溢出点确认
+		// 13 御魂溢出点确认
 		desc: '退出结算_御魂溢出确认',
 		oper: [
-			[center, 1280, 720, 585, 398, 694, 446, 300]
+			[center, 1280, 720, 686, 398, 799, 445, 300],
 		],
 		notForCnt: true,
 	}, {
-		// 打开后的达摩，所有点都被结算挡住了，使用经验，金币buff，和第一个奖励的xx作为特征
+		// 14 打开后的达摩，所有点都被结算挡住了，使用经验，金币buff，和第一个奖励的xx作为特征
 		desc: '退出结算_经验金币buff_第一个掉落',
 		operStepRandom: [
 			[
@@ -203,72 +171,324 @@ export class Func002 implements IFuncOrigin {
 			]
 		],
 	}, {
-		// 经验金币妖怪，胜利太鼓
+		// 15 经验金币妖怪，胜利太鼓
 		desc: '退出结算_经验金币妖怪_胜利太鼓',
 		oper: [
 			[center, 1280, 720, 535, 674, 743, 709, 1000],
 		]
-	}, { // 体力不足
-		desc: '退出结算_体力不足',
+	}, { // 16 契灵结契失败
+		desc: [
+			1280, 720,
+			[
+				[center, 512, 297, 0xbbbbbb],
+				[center, 610, 277, 0xbbbbbb],
+				[center, 684, 295, 0xb0b0b0],
+				[center, 785, 296, 0xc0c0c0],
+				[center, 520, 339, 0x9f9f9f],
+				[center, 797, 328, 0xc1c1c1],
+			]
+		],
 		oper: [
-			[center, 1280, 720, 916, 179, 951, 211, 2000]
+			[center, 1280, 720, 404, 609, 578, 644, 1000]	//	放弃结契 总不能有人想选再次结契吧
+		]
+	}, { // 17 自选120关闭
+		desc: [1280, 720,
+			[
+				[center, 532, 136, 0xfbe9a8],
+				[center, 602, 120, 0xf4d676],
+				[right, 793, 129, 0xf6db88],
+				[right, 919, 123, 0xf6da7f],
+				[right, 1016, 205, 0xfef6d7],
+			]
+		],
+		oper: [
+			[center, 1280, 720, 1113, 130, 1147, 165, 1000],
 		]
 	}, {
-		// 单人-失败太鼓
+		// 18 结界卡超上限提示
+		desc: '结界卡超上限提示',
+		oper: [
+			[center, 1280, 720, 544, 348, 570, 373, 500],
+			[center, 1280, 720, 436, 405, 606, 459, 200],
+		]
+	}, { // 19 体力不足
+		desc: '退出结算_体力不足'
+	}, {
+		// 20 单人-失败太鼓,重新挑战
 		desc: '退出结算_单人_失败太鼓',
 		oper: [
 			[center, 1280, 720, 813, 465, 909, 570, 500],
 		],
 		retest: 800,
-	}];
+	}, {
+		// 21 邀请好友确认
+		desc: '退出结算_取消确认框',
+		oper: [
+			[center, 1280, 720, 680, 411, 838, 452, 500],
+		],
+		notForCnt: true, // 点击确认不统计退出结算的次数
+	}, {
+		// 22 退出结算_再次挑战_取消确认框_未勾
+		desc: '退出结算_再次挑战_取消确认框_未勾',
+		oper: [
+			[center, 1280, 720, 544, 347, 570, 374, 300],
+			[center, 1280, 720, 680, 411, 838, 452, 500],
+		],
+		notForCnt: true, // 点击确认不统计退出结算的次数
+	}, {
+		// 23 阴阳师/英杰技能升级提示
+		desc: [1280, 720,
+			[
+				[center, 413, 394, 0x8e6a40],
+				[center, 869, 393, 0x8f6b41],
+				[center, 652, 275, 0x483424],
+				[center, 802, 312, 0xcab49b],
+				[center, 421, 262, 0x38291d],
+				[center, 835, 387, 0xaf947c],
+				[center, 397, 299, 0x817976],
+			]
+		],
+		oper: [
+			[center, 1280, 720, 225, 486, 1082, 679, 1000],
+		]
+	}, {
+		// 24 缓存过多点击确认按钮
+		desc: [1280, 720,
+			[
+				[center, 332, 142, 0x644435],
+				[center, 946, 142, 0x654435],
+				[center, 441, 492, 0xdf6851],
+				[center, 756, 497, 0xf3b25e],
+				[center, 919, 484, 0xcbb59c],
+				[center, 944, 165, 0xcbb59c],
+				[center, 354, 499, 0xcbb59c],
+				[center, 573, 570, 0x6d4a38],
+			]
+		],
+		oper: [
+			[center, 1280, 720, 727, 484, 859, 535, 1000],
+		]
+	}, { // 25 斗技退出失败
+		desc: [
+			1280, 720,
+			[
+				[center, 470, 77, 0x544e60],
+				[center, 452, 120, 0x595063],
+				[center, 495, 120, 0x575062],
+				[center, 736, 102, 0xc3bdaf],
+				[center, 918, 112, 0xada596],
+			]
+		],
+		oper: [
+			[center, 1280, 720, 830, 638, 1044, 701, 1000],
+		]
+	}, { // 26 斗技退出失败 阴阳师皮肤遮挡
+		desc: [1280, 720,
+			[
+				[center, 470, 77, 0x544e60],
+				[center, 452, 120, 0x595063],
+				[center, 495, 120, 0x575062],
+				[center, 570, 29, 0x91846b],
+				[center, 371, 15, 0x5e4935],
+			]
+		],
+		oper: [
+			[center, 1280, 720, 830, 638, 1044, 701, 1000],
+		]
+	}, { // 27  左下统计图标
+		desc: [1280, 720,
+			[
+				[center, 78, 643, 0x3c2b20],
+				[center, 72, 655, 0xae8b5f],
+				[center, 89, 652, 0xb69363],
+				[center, 78, 675, 0x36261a],
+			]
+		],
+		oper: [
+			[center, 1280, 720, 1112, 113, 1238, 595, 1000],
+		]
+	}, {
+		// 28 喂猫喂狗奖励
+		desc: [1280, 720,
+			[
+				[center, 327, 191, 0x5c4026],
+				[center, 499, 191, 0xa38051],
+				[right, 965, 188, 0x654323],
+				[right, 933, 212, 0x3e3935],
+				[right, 940, 272, 0xb0a1a0],
+			]
+		],
+
+		oper: [
+			[center, 1280, 720, 1112, 113, 1238, 595, 1000],
+		]
+	}, { // 29 小白提示框
+		desc: [1280, 720,
+			[
+				[center, 483, 195, 0x464342],
+				[right, 808, 201, 0x423e3d],
+				[left, 296, 383, 0xcb2e43],
+				[right, 905, 406, 0x624a3a],
+				[center, 427, 528, 0x645346],
+			]
+		],
+		oper: [
+			[center, 1280, 720, 528, 606, 699, 660, 1000],
+		],
+		notForCnt: true, // 点击确认不统计退出结算的次数
+	}, { // 30 关联手机
+		desc: [1280, 720,
+			[
+				[right, 997, 451, 0xe7cfb1],
+				[right, 1058, 491, 0xdec2a3],
+				[right, 1020, 536, 0xd7b17b],
+				[right, 876, 204, 0xe8e0d4],
+			]
+		],
+		oper: [
+			[center, 1280, 720, 968, 463, 1036, 522, 1000],
+		],
+		notForCnt: true,
+	}, { // 31 关联手机确认框
+		desc: [1280, 720,
+			[
+				[center, 480, 488, 0xdf6851],
+				[center, 565, 515, 0xdf6851],
+				[right, 710, 488, 0xf3b25e],
+				[right, 692, 393, 0xf3b25e],
+				[right, 834, 429, 0xf3b25e],
+				[right, 802, 520, 0xf4b35d],
+			]
+		],
+		oper: [
+			[center, 1280, 720, 475, 483, 579, 523, 1000],
+		],
+		notForCnt: true,
+	}, { // 32 自动接受邀请_确认弹窗
+		desc: [1280, 720,
+			[
+				[center, 615, 224, 0x6b4939],
+				[right, 857, 224, 0x6a4838],
+				[center, 587, 296, 0xa83005],
+				[center, 587, 364, 0x725f4d],
+				[center, 572, 455, 0xe16a52],
+				[right, 738, 454, 0xf4b660],
+			]
+		],
+		oper: [
+			[center, 1280, 720, 578, 356, 600, 381, 1000],
+			[center, 1280, 720, 688, 409, 836, 455, 1000],
+		],
+		notForCnt: true,
+	}, { // 33 断线期间结束
+		desc: [1280, 720,
+			[
+				[center, 473, 221, 0x6b4939],
+				[right, 833, 221, 0x664536],
+				[right, 793, 493, 0x6b4939],
+				[center, 469, 493, 0x6b4939],
+				[center, 590, 408, 0xf4b25d],
+				[right, 686, 436, 0xf4b25d],
+			]
+		],
+		oper: [
+			[center, 1280, 720, 592, 401, 692, 444, 1000],
+		],
+		notForCnt: true,
+	}, { // 34 寮樱花树木提升
+		desc: [1280, 720,
+			[
+				[center, 489, 582, 0xedd2c2],
+				[center, 476, 610, 0xb7a296],
+				[right, 779, 580, 0xf1e3d7],
+				[right, 826, 569, 0xb8a59a],
+				[right, 781, 109, 0x8e684a],
+				[right, 794, 110, 0xe4cb91],
+			]
+		],
+		oper: [
+			[center, 1280, 720, 779, 95, 808, 124, 1000],
+		],
+		notForCnt: true,
+	}, { // 35 结算保底页面  //字体存白容易误触,加了聊天框弹出的点防止误触
+		desc: [1280, 720,
+			[
+				[center, 597, 693, 0xfefefe],
+				[right, 657, 693, 0xefeff0],
+				[right, 686, 692, 0xf7f8f8],
+				[right, 713, 697, 0xf5f5f6],
+				[center, 569, 691, 0xeeeef0],
+				[right, 1055, 2, 0x4c3a2b],
+				[right, 1055, 40, 0x4c3a2b],
+			]
+		],
+		oper: [
+			[center, 1280, 720, 77, 668, 256, 706, 1000],
+		]
+	}, { // 36 姑获鸟皮肤确定弹窗(羡煞旁人)
+		desc: [1280, 720,
+			[
+				[center, 636, 221, 0xcec3b5],
+				[center, 482, 367, 0xd6cdbd],
+				[right, 803, 366, 0xd6cdbd],
+				[center, 597, 472, 0xf4b25d],
+				[center, 631, 320, 0xd6cdbd],
+				[center, 630, 532, 0xb84f3f],
+			]
+		],
+		oper: [
+			[center, 1280, 720, 595, 454, 685, 494, 1000],
+		]
+	},];
 	operatorFunc(thisScript: Script, thisOperator: IFuncOperator[]): boolean {
-		let thisconf = thisScript.scheme.config['2'];
+		const thisconf = thisScript.scheme.config['2'];
 		if (thisconf && thisconf.rechallenge && thisScript.oper({
 			id: 2,
 			name: '退出结算_重新挑战',
-			operator: thisOperator.slice(-1)
+			operator: [thisOperator[20], thisOperator[22],]
 		})) {
 			return true;
 		}
 		if (thisScript.oper({
 			id: 2,
 			name: '体力不足',
-			operator: thisOperator.slice(-2, -1)
+			operator: [thisOperator[19]]
 		})) {
 			if (thisconf && thisconf.no_sushi_switch_enabled) {
 				thisScript.rerun(thisconf.next_scheme);
 				sleep(3000);
 				return;
-			} else if (thisconf && !thisconf.no_sushi_switch_enabled) {
+			} else if (!thisconf.no_sushi_switch_enabled) {
 				thisScript.doPush(thisScript, { text: '体力不够已停止，请查看。', before() { thisScript.myToast('脚本即将停止，正在上传数据'); } });
 				thisScript.stop();
 				sleep(3000);
 				return;
 			}
 		}
-		if (thisconf && thisconf.mini_area_click && thisScript.oper({
+		if (thisconf.fail && thisScript.oper({
 			id: 2,
-			name: '退出结算_小区域点击',
-			operator: [{
-				desc: '退出结算_已打开的达摩_1',
-				oper: thisOperator[0].oper
-			}, {
-				desc: '退出结算_已打开的达摩_2',
-				oper: thisOperator[0].oper
-			}, {
-				desc: '退出结算_已打开的达摩_3',
-				oper: thisOperator[0].oper
-			}, {
-				desc: '退出结算_单人_胜利太鼓',
-				oper: thisOperator[0].oper
-			}]
+			name: '退出结算_失败停止',
+			operator: [thisOperator[9], thisOperator[10]]
 		})) {
+			thisScript.doPush(thisScript, { text: '战斗失败，已停止，请查看。', before() { thisScript.myToast('脚本即将停止，正在上传数据'); } });
+			thisScript.rerun(thisconf.next_scheme);
+			sleep(3000);
 			return true
 		}
 		return thisScript.oper({
 			id: 2,
 			name: '退出结算',
-			operator: thisOperator.slice(0, -2)
+			operator: [
+				thisOperator[32],
+				thisOperator[0], thisOperator[1], thisOperator[2], thisOperator[3],
+				thisOperator[4], thisOperator[5], thisOperator[6], thisOperator[7],
+				thisOperator[8], thisOperator[9], thisOperator[25], thisOperator[10], thisOperator[21],
+				thisOperator[12], thisOperator[13], thisOperator[14], thisOperator[15],
+				thisOperator[16], thisOperator[17], thisOperator[18], // 22要放18前面
+				thisOperator[11], thisOperator[23], thisOperator[24],
+				thisOperator[26], thisOperator[27], thisOperator[28], thisOperator[29],
+				thisOperator[30], thisOperator[31], thisOperator[33], thisOperator[34],
+				thisOperator[35], thisOperator[36]]
 		});
 	}
 }

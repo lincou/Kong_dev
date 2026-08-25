@@ -1,6 +1,6 @@
-import { IFuncOrigin, IFuncOperatorOrigin, IFuncOperator, IFuncConfigOrigin } from '@/interface/IFunc';
+import { IFuncOrigin, IFuncOperatorOrigin, IFuncOperator } from '@/interface/IFunc';
 import { Script } from '@/system/script';
-const normal = -1; //定义常量
+// const normal = -1; //定义常量
 const left = 0;
 const center = 1;
 const right = 2;
@@ -12,124 +12,107 @@ export class Func313 implements IFuncOrigin {
 	config = [{
 		desc: '召唤配置',
 		config: [{
-			name: 'summon_type',
-			desc: '召唤配置（使用鸣契石/直接探查）',
+			name: 'type',
+			desc: '攻打类型',
 			type: 'list',
-			data: ['鸣契石', '探查'],
-			default: '鸣契石'
+			data: ['镇墓兽', '火灵', '茨球', '小黑', '针女', '薙魂', '月魔兔', '狐火'],
+			default: '镇墓兽'
 		}, {
-			name: 'summon_qiling',
-			desc: '使用鸣契石时召唤哪个契灵',
+			name: 'buy',
+			desc: '是否购买石头',
+			type: 'switch',
+			default: false
+		}, {
+			name: 'buy_ball',
+			desc: '是否购买初级契灵球',
+			type: 'switch',
+			default: false
+		}, {
+			name: 'team',
+			desc: '选择攻打方式',
 			type: 'list',
-			data: ['1 小黑', '2 茨球', '3 火灵', '4 镇墓兽'],
-			default: '4 镇墓兽'
-		}]
-	},
-	{
-		desc: '用于战斗前进入式神录进行御魂装配，需启用510功能，逗号分隔，-1,-1表示不切换预设，5,1表示第5个分组第1组预设',
-		config: [{
-			name: 'preset_pair_探查',
-			desc: '探查',
-			type: 'text',
-			default: '5,1',
+			data: ['单人', '队长', '队员'],
+			default: '单人'
 		}, {
-			name: 'preset_pair_契灵_火灵',
-			desc: '契灵_火灵',
-			type: 'text',
-			default: '4,1',
-		}, {
-			name: 'preset_pair_契灵_小黑',
-			desc: '契灵_小黑',
-			type: 'text',
-			default: '4,2',
-		}, {
-			name: 'preset_pair_契灵_镇墓兽',
-			desc: '契灵_镇墓兽',
-			type: 'text',
-			default: '4,3',
-		}, {
-			name: 'preset_pair_契灵_茨球',
-			desc: '契灵_茨球',
-			type: 'text',
-			default: '4,4',
+			name: 'next_scheme',
+			desc: '无盘子后下一个方案',
+			type: 'scheme',
+			default: '__停止脚本__',
 		}]
 	}]
-	operator: IFuncOperatorOrigin[] = [{
-		// 0 契灵界面
-		desc: [
-			1280, 720,
-			[
-				[left, 44, 38, 0xf5e6a5],
-				[left, 133, 36, 0xf5f1e0],
-				[left, 177, 36, 0xf6f2e1],
-				[left, 222, 38, 0xf4f0df],
-				[left, 276, 34, 0xedc958],
-				[right, 1191, 485, 0x755bc7],
-			]
+
+	operator: IFuncOperatorOrigin[] = [{ // 0 探索地图进入契灵之境
+		desc: '探索地图界面',
+		oper: [
+			[center, 1280, 720, 1024, 642, 1071, 680, 3000],
 		]
-	}, {
-		// 1 追踪
-		desc: [
-			1280, 720,
+	}, { // 1 探索地图界面_含时空秘境进入契灵之境 废弃
+		oper: [
+			[center, 1280, 720, 1153, 62, 1193, 82, 1000],
+		]
+	}, { // 2 逢魔之原切换平安京
+		desc: [1280, 720,
 			[
-				[right, 1180, 478, 0xa69fcf],
-				[right, 1192, 487, 0x6d6bc1],
-				[right, 1165, 612, 0xfef4e6],
-				[right, 1210, 608, 0xfdf3e5],
-				[right, 1156, 634, 0xfef4e6],
-				[right, 1174, 638, 0xfef4e6],
-				[right, 1192, 631, 0xfdf3e5],
-				[right, 1211, 630, 0xfef4e6],
+				[center, 436, 616, 0xac8755],
+				[right, 826, 614, 0xbb915a],
+				[center, 542, 688, 0x7a5539],
+				[right, 736, 678, 0x8f6d46],
+				[left, 87, 331, 0xfffcd8],
+				[left, 84, 351, 0xffffe4],
 			]
 		],
 		oper: [
-			[center, 1280, 720, 1148, 602, 1225, 664, 4000],
-			// [center, 1280, 720, 18, 472, 79, 501, 3000],
+			[center, 1280, 720, 75, 333, 106, 365, 1000],
 		]
-	}, {
-		// 2 探查
-		desc: [
-			1280, 720,
+	}, { // 3 选择契灵
+		desc: [1280, 720,
 			[
-				[right, 1155, 605, 0xfef4e6],
-				[right, 1181, 598, 0xfef4e6],
-				[right, 1197, 613, 0xfef4e6],
-				[right, 1202, 600, 0xfef4e6],
-				[right, 1189, 648, 0xfdf3e5],
-				[left, 43, 40, 0xf5e5a6],
-				[right, 1236, 29, 0xd4ae83],
-				[right, 1042, 597, 0xc3a888],
-				[right, 1204, 627, 0xfef4e6],
+				[left, 54, 30, 0xefd390],
+				[left, 44, 40, 0xf5e6a6],
+				[left, 56, 50, 0xf0d591],
+				[left, 77, 638, 0xf4f4cf],
+				[left, 186, 659, 0xf9eedb],
+				[left, 293, 627, 0xf1efc5],
 			]
 		],
 		oper: [
-			[center, 1280, 720, 1139, 586, 1223, 668, 2000],
+			[center, 1280, 720, 230, 496, 256, 522, 1000],
+			[center, 1280, 720, 431, 530, 464, 555, 1000],
+			[center, 1280, 720, 688, 495, 718, 528, 1000],
+			[center, 1280, 720, 938, 496, 970, 519, 1000],
 		]
-	}, {
-		// 3 契灵式神录 
-		oper: [
-			[center, 1280, 720, 1030, 563, 1071, 608, 1000], // 契灵式神录 
-			[center, 1280, 720, 15, 1000, -1, -1, -1], // 找色后加范围
-			[center, 1280, 720, 1160, 475, 1198, 502, 500], // 石头召唤
-		]
-	}, {
-		// 4 契灵挑战
-		desc: [
-			1280, 720,
+	}, { // 4 召唤
+		desc: [1280, 720,
 			[
-				[left, 42, 39, 0xf6e8a9],
-				[left, 337, 33, 0x352e23],
-				[right, 1193, 583, 0xddd0ba],
-				[right, 1007, 648, 0xe2d6bf],
-				[right, 1046, 670, 0x382015],
-				// [right, 875, 563, 0x403930],
+				[center, 559, 623, 0xffe392],
+				[center, 566, 659, 0xffedbc],
+				[right, 721, 631, 0xffe291],
+				[right, 723, 655, 0xffecb8],
+				[center, 491, 562, 0xefcea4],
+				[right, 706, 561, 0xeccda0],
 			]
 		],
 		oper: [
-			[center, 1280, 720, 1142, 577, 1243, 676, 1000],
+			[center, 1280, 720, 770, 544, 807, 580, 1000],
+			[center, 1280, 720, 564, 627, 719, 659, 1000],
+			[center, 1280, 720, 688, 415, 828, 447, 3000],
 		]
-	}, {
-		// 5 结契失败
+	}, { // 5 单人/组队
+		desc: [1280, 720,
+			[
+				[left, 152, 585, 0x9b6c35],
+				[left, 87, 443, 0xf6ecc9],
+				[left, 102, 510, 0xe1d1a7],
+				[right, 693, 592, 0xceba94],
+				[right, 881, 589, 0xceb694],
+				[right, 1012, 591, 0xe3d8c1],
+			]
+		],
+		oper: [
+			[center, 1280, 720, 1151, 591, 1244, 662, 1000],
+			[center, 1280, 720, 964, 590, 1059, 656, 1000],
+		]
+	}, { // 6 结契失败
 		desc: [
 			1280, 720,
 			[
@@ -137,32 +120,46 @@ export class Func313 implements IFuncOrigin {
 				[center, 610, 277, 0xbbbbbb],
 				[center, 684, 295, 0xb0b0b0],
 				[center, 785, 296, 0xc0c0c0],
-				[right, 1204, 590, 0x875015],
-				[right, 1206, 627, 0x6c5220],
+				[center, 520, 339, 0x9f9f9f],
+				[center, 797, 328, 0xc1c1c1],
 			]
 		],
 		oper: [
-			[center, 1280, 720, 444, 552, 814, 701, 1000],
+			[center, 1280, 720, 404, 609, 578, 644, 1000]	//	放弃结契 总不能有人想选再次结契吧
 		]
-	}, {
-		// 6 结契成功
+	}, { // 7 结契成功
 		desc: [
 			1280, 720,
 			[
-				[center, 844, 44, 0x664d29],
-				[center, 862, 46, 0xe5ce89],
-				[center, 872, 45, 0xe5ce89],
-				[center, 892, 51, 0xe4cd88],
-				[center, 898, 52, 0xd9c280],
-				[center, 877, 60, 0xe5ce89],
+				[right, 740, 52, 0x654c27],
+				[right, 834, 61, 0x3e2810],
+				[right, 889, 64, 0x372410],
+				[right, 927, 60, 0x342210],
+				[right, 835, 72, 0x422c10],
+				[right, 906, 73, 0x442d15],
 			]
 		],
 		oper: [
 			[center, 1280, 720, 173, 534, 615, 691, 1000],
 			[center, 1280, 720, 173, 534, 615, 691, 1000],
 		]
-	}, {
-		// 7 棋盘
+	}, { // 8 盘子已满提醒
+		desc: [
+			1280, 720,
+			[
+				[center, 413, 223, 0x654435],
+				[center, 868, 223, 0x644434],
+				[center, 559, 352, 0x4b5ee9],
+				[center, 561, 431, 0xdf6851],
+				[center, 712, 430, 0xf3b25e],
+			]
+		],
+		oper: [
+			[center, 1280, 720, 678, 405, 839, 461, 1000], // 确认
+			[center, 1280, 720, 415, 240, 869, 341, 1000], // 弹窗区域ocr
+			[center, 1280, 720, 446, 412, 598, 453, 1000], // 取消
+		]
+	}, { // 9 棋盘
 		desc: [
 			1280, 720,
 			[
@@ -180,8 +177,37 @@ export class Func313 implements IFuncOrigin {
 			[center, 1280, 720, 589, 434, 717, 551, 1000], // 中
 			[center, 1280, 720, 899, 403, 998, 506, 1000], // 大
 		]
-	}, {
-		// 8 结契成功
+	}, { // 10 组队确认
+		desc: [
+			1280, 720,
+			[
+				[center, 372, 145, 0x684636],
+				[center, 907, 145, 0x674535],
+				[center, 362, 572, 0x5c3d2f],
+				[center, 900, 573, 0x624233],
+				[right, 1186, 634, 0x9b9483],
+				[center, 561, 515, 0xf3b25e],
+			]
+		],
+		oper: [
+			[center, 1280, 720, 407, 417, 429, 439, 1000], // 不公开
+			[center, 1280, 720, 537, 495, 744, 536, 1000], // 创建
+		]
+	}, { // 11 逢魔之原切换平安京
+		desc: [1280, 720,
+			[
+				[center, 463, 615, 0x875a30],
+				[right, 822, 615, 0x885c30],
+				[center, 529, 687, 0x784e2e],
+				[right, 742, 675, 0x774e2f],
+				[right, 1189, 339, 0xfff9cd],
+				[right, 1195, 357, 0xffffe4],
+			]
+		],
+		oper: [
+			[center, 1280, 720, 1174, 343, 1209, 373, 1000],
+		]
+	}, { // 12 结契成功
 		desc: [
 			1280, 720,
 			[
@@ -194,269 +220,190 @@ export class Func313 implements IFuncOrigin {
 		oper: [
 			[center, 1280, 720, 372, 548, 846, 687, 1000],
 		]
-	}, {
-		// 9 画线
-		desc: [
-			1280, 720,
+	}, { // 13 石头购买
+		desc: [1280, 720,
 			[
-				[left, 31, 23, 0xbb9977],
-				[left, 175, 37, 0xb38f61],
-				[left, 255, 27, 0xb2916a],
-				[center, 770, 583, 0x8c673d],
-				[center, 508, 583, 0x8c673d],
-				[center, 430, 341, 0x8c673d],
-				[center, 1220, 646, 0x5e4e43],
+				[center, 513, 90, 0x8c4e1b],
+				[right, 772, 94, 0x914820],
+				[right, 785, 468, 0xffdda4],
+				[right, 784, 484, 0xffdda5],
+				[right, 703, 581, 0xf3b25e],
 			]
 		],
 		oper: [
-			[center, 1280, 720, 423, 217, 515, 297, -1], // 推荐查找区域左上
-			[center, 1280, 720, 640, 62, 722, 145, -1], // 推荐查找区域上
-			[center, 1280, 720, 845, 206, 931, 294, -1], // 推荐查找区域右上
-			[center, 1280, 720, 763, 447, 854, 536, -1], // 推荐查找区域右下
-			[center, 1280, 720, 512, 450, 599, 540, -1], // 推荐查找区域左下
-
-			[center, 1280, 720, 393, 260, 467, 333, 1000], // 连线左上
-			[center, 1280, 720, 609, 122, 670, 170, 1000], // 连线上
-			[center, 1280, 720, 809, 263, 881, 318, 1000], // 连线右上
-			[center, 1280, 720, 729, 509, 801, 564, 1000], // 连线右下
-			[center, 1280, 720, 472, 498, 545, 577, 1000], // 连线左下
+			[center, 1280, 720, 762, 464, 806, 501, 1000],
+			[center, 1280, 720, 568, 559, 718, 599, 2000],
+			[center, 1280, 720, 568, 559, 718, 599, 1000],
 		]
-	}, {
-		// 10 石头召唤选契灵确认
-		desc: [
-			1280, 720,
+	}, { // 14 购买初级契灵球
+		desc: [1280, 720,
 			[
-				[left, 44, 38, 0xf5e6a5],
-				[left, 65, 41, 0x8f5f33],
-				[right, 1187, 612, 0xe5dac4],
-				[right, 1199, 661, 0xe0d6bf],
-				[center, 554, 682, 0x22160d],
-				[center, 745, 681, 0x22160d],
+				[left, 43, 39, 0xf7ebad],
+				[left, 281, 42, 0x593716],
+				[right, 1245, 32, 0xd7c3a2],
+				[right, 661, 32, 0xd7c3a2],
+				[left, 153, 584, 0x9c6d36],
 			]
 		],
 		oper: [
-			[center, 1280, 720, 151, 208, 276, 515, 1000], // 1 小黑
-			[center, 1280, 720, 403, 215, 533, 515, 1000], // 2 茨球
-			[center, 1280, 720, 657, 208, 791, 512, 1000], // 3 火灵
-			[center, 1280, 720, 921, 214, 1050, 510, 1000], // 4 镇墓兽
-			[center, 1280, 720, 1153, 601, 1227, 679, 5000], // 5 确认
+			[center, 1280, 720, 653, 25, 671, 42, 1000],
 		]
-	}, {
-		// 11 探索地图进入契灵之境
-		desc: '探索地图界面',
+	}, { // 15 购买确认_三行字
+		desc: [
+			1280, 720,
+			[
+				[center, 570, 562, 0xf3b25e],
+				[center, 571, 590, 0xf3b25e],
+				[right, 708, 564, 0xf3b25e],
+				[right, 709, 588, 0xf3b25e],
+				[right, 784, 469, 0xfddba2],
+				[right, 800, 467, 0x402e2c],
+			]
+		],
 		oper: [
-			[left, 1280, 720, 938, 640, 996, 694, 1000],
+			[center, 1280, 720, 761, 462, 800, 498, 1000],
+			[center, 1280, 720, 560, 556, 715, 598, 1000],
+			[center, 1280, 720, 1042, 176, 1187, 585, 500],
 		]
-	}]
+	},
+	]
 	operatorFunc(thisScript: Script, thisOperator: IFuncOperator[]): boolean {
-		if (thisScript.oper({
-			name: '契灵界面',
-			operator: [thisOperator[0]]
-		}) && thisScript.oper({
-			id: 313,
-			name: '契灵界面_追踪',
-			operator: [thisOperator[1]]
-		})) {
-			return true;
-		}
-
-		const thisConf = thisScript.scheme.config['313'];
-		if (thisScript.oper({
-			name: '契灵界面',
-			operator: [thisOperator[0]]
-		}) && thisScript.oper({
-			id: 313,
-			name: '契灵界面_探查',
-			operator: [{ desc: thisOperator[2].desc, retest: 500 }]
-		})) {
-			if (thisScript.global.qiling_Position) {
-				thisScript.regionClick([thisScript.global.qiling_Position]);
-				thisScript.global.qiling_Position = null;
+		const thisconf = thisScript.scheme.config['313'];
+		if (thisconf.buy) {
+			if (thisScript.oper({
+				id: 313,
+				name: '石头购买',
+				operator: [thisOperator[13]]
+			})) {
 				return true;
 			}
-			let arrFind = [`契灵_火灵`, `契灵_小黑`, `契灵_镇墓兽`, `契灵_茨球`];
-			let i: number;
-			for (i = 0; i < arrFind.length; i++) {
-				const p = thisScript.findMultiColor(arrFind[i])
-				if (p) {
-					const toClick = p;
-					const toClickRegion = [
-						toClick.x,
-						toClick.y,
-						toClick.x + thisOperator[3].oper[1][0],
-						toClick.y + thisOperator[3].oper[1][0],
-						thisOperator[3].oper[1][1],
-					];
-					thisScript.global.qiling_Position = toClickRegion;
-					break;
-				}
+		}
+		if (thisconf.buy_ball && thisScript.global.qiling_ball < 3) {
+			if (thisScript.oper({
+				id: 313,
+				name: '石头购买',
+				operator: [thisOperator[14]]
+			})) {
+				thisScript.global.qiling_ball++;
+				return true;
 			}
-			if (i === 4) {
-				// 没找到任何契灵，选择召唤还是选择探查
-				if ('鸣契石' === thisConf.summon_type) {
-					// 单独走分支
-					let curCnt = 0;
-					let maxCount = 3;
-					while (thisScript.oper({
+		}
+		if (['镇墓兽', '火灵', '茨球', '小黑'].includes(thisconf.type as string)) {
+			if (thisScript.oper({
+				id: 313,
+				name: '切换平安京',
+				operator: [thisOperator[2]]
+			})) {
+				return true;
+			}
+		} else if (['针女', '薙魂', '月魔兔', '狐火'].includes(thisconf.type as string)) {
+			if (thisScript.oper({
+				id: 313,
+				name: '切换逢魔之原',
+				operator: [thisOperator[11]]
+			})) {
+				return true;
+			}
+		}
+		if (thisconf.team !== '队员') {
+			switch ((thisconf.type as string)) {
+				case '镇墓兽':
+				case '针女':
+					if (thisScript.oper({
 						id: 313,
-						name: '鸣契石',
-						operator: [{
-							desc: thisOperator[2].desc,
-							oper: [thisOperator[3].oper[2]]
-						}]
+						name: '镇墓兽||针女',
+						operator: [{ desc: thisOperator[3].desc, oper: [thisOperator[3].oper[0]] }]
 					})) {
-						curCnt++;
-						thisScript.keepScreen();
-						if (curCnt >= maxCount) {
-							thisScript.myToast(`连续执行${maxCount}次挑战后未开始，脚本自动停止`);
-							thisScript.doPush(thisScript, { text: `[${thisScript.schemeHistory.map(item => item.schemeName).join('、')}]已停止，请查看。`, before() { thisScript.myToast('脚本即将停止，正在上传数据'); } });
-							thisScript.stop();
-							sleep(2000);
-							return false;
-						}
-					}
-					if (curCnt) {
 						return true;
 					}
-				} else if ('探查' === thisConf.summon_type) {
-					// 探查通知下次点击区域为探查按钮，先要换御魂才行
-					thisScript.global.qiling_Position = thisOperator[2].oper[0];
-				}
-
-				const [p, q] = (thisConf[`preset_pair_探查`] as string).split(/[,，]/);
-				console.log(`设置探查预设分组：${p}, ${q}`);
-				thisScript.global.preset_once_groupNum = parseInt(p?.trim(), 10);
-				thisScript.global.preset_once_defaultNum = parseInt(q?.trim(), 10);
-			} else {
-				const [p, q] = (thisConf[`preset_pair_${arrFind[i]}`] as string).split(/[,，]/);
-				console.log(`设置${arrFind[i]}预设分组：${p}, ${q}`);
-				thisScript.global.preset_once_groupNum = parseInt(p?.trim(), 10);
-				thisScript.global.preset_once_defaultNum = parseInt(q?.trim(), 10);
+					break;
+				case '火灵':
+				case '薙魂':
+					if (thisScript.oper({
+						id: 313,
+						name: '火灵||薙魂',
+						operator: [{ desc: thisOperator[3].desc, oper: [thisOperator[3].oper[1]] }]
+					})) {
+						return true;
+					}
+					break;
+				case '茨球':
+				case '月魔兔':
+					if (thisScript.oper({
+						id: 313,
+						name: '茨球||月魔兔',
+						operator: [{ desc: thisOperator[3].desc, oper: [thisOperator[3].oper[2]] }]
+					})) {
+						return true;
+					}
+					break;
+				case '小黑':
+				case '狐火':
+					if (thisScript.oper({
+						id: 313,
+						name: '小黑||狐火',
+						operator: [{ desc: thisOperator[3].desc, oper: [thisOperator[3].oper[3]] }]
+					})) {
+						return true;
+					}
+					break;
 			}
-
-			if (thisScript.global.qiling_last === null && thisScript.global.preset_once_groupNum > 0) {
-				thisScript.global.qiling_last = i;
-				thisScript.regionClick([thisOperator[3].oper[0]]);
-				thisScript.global.change_shikigami_state = 'flushed';
-			} else if (thisScript.global.qiling_last !== i && thisScript.global.preset_once_groupNum > 0) {
-				thisScript.regionClick([thisOperator[3].oper[0]]);
-				thisScript.global.change_shikigami_state = 'flushed';
+		}
+		if (thisScript.oper({
+			id: 313,
+			name: '组队/单人',
+			operator: [{ desc: thisOperator[5].desc }]
+		})) {
+			if (thisconf.team === '队长') {
+				thisScript.regionClick([thisOperator[5].oper[1]]);
+				thisScript.global.team_up_Frist = true;
+				return true;
+			} else if (thisconf.team === '单人') {
+				thisScript.regionClick([thisOperator[5].oper[0]]);
+				return true;
 			}
+		}
+		if (thisScript.oper({
+			id: 313,
+			name: '契灵弹窗判断契忆',
+			operator: [{ desc: thisOperator[8].desc }]
+		})) {
+			const temp = thisScript.findText('契', 0, thisOperator[8].oper[1], '包含');
+			if (temp.length > 0) {
+				thisScript.regionClick([thisOperator[8].oper[2]]);
+				thisScript.rerun('返回庭院');
+				sleep(3000);
+				return true;
+			}
+			thisScript.regionClick([thisOperator[8].oper[0]]);
 			return true;
 		}
-
+		let curCnt = 0;
+		const maxCount = 4;
+		while (thisScript.oper({
+			id: 313,
+			name: '契灵无盘子',
+			operator: [{ desc: thisOperator[9].desc }]
+		})) {
+			curCnt++;
+			thisScript.keepScreen(false);
+			if (curCnt >= maxCount) {
+				thisScript.regionClick([thisOperator[9].oper[1]]);
+				thisScript.doPush(thisScript, { text: '无盘子', before() { thisScript.myToast('无盘子'); } });
+				thisScript.rerun(thisconf.next_scheme);
+				sleep(2000);
+				return true;
+			}
+			sleep(1000);
+		}
 		if (thisScript.oper({
 			id: 313,
 			name: '契灵杂项',
-			operator: [
-				thisOperator[4], thisOperator[5], thisOperator[6],
-				thisOperator[8], thisOperator[11],
-			]
+			operator: [thisOperator[0], thisOperator[4], thisOperator[6]
+				, thisOperator[7], thisOperator[10], thisOperator[12]]
 		})) {
 			return true;
 		}
-
-		// // 选式盘，超过3次点着没反应，那就停止脚本并osp推送
-		// const shipanIndex = { '小': 0, '中': 1, '大': 2 }[thisConf.shipan_sort as string];
-		// let shipanCurCnt = 0;
-		// let shipanMaxCount = 3;
-		// while (thisScript.oper({
-		//   id: 313,
-		//   name: '契灵战斗_选式盘',
-		//   operator: [{
-		//     desc: thisOperator[7].desc,
-		//     oper: [thisOperator[7].oper[shipanIndex]]
-		//   }]
-		// })) {
-		//   shipanCurCnt++;
-		//   thisScript.keepScreen();
-		//   if (shipanCurCnt >= shipanMaxCount) {
-		//     thisScript.myToast(`连续执行${shipanMaxCount}次挑战后未开始，脚本自动停止`);
-		//     thisScript.doPush(thisScript, { text: `[${thisScript.schemeHistory.map(item => item.schemeName).join('、')}]已停止，请查看。`, before() { thisScript.myToast('脚本即将停止，正在上传数据'); } });
-		//     thisScript.stop();
-		//     sleep(2000);
-		//     return false;
-		//   }
-		// }
-		// if (shipanCurCnt) {
-		//   return true;
-		// }
-
-		// if (thisScript.oper({
-		//   id: 313,
-		//   name: '契灵划线_场景',
-		//   operator: [{
-		//     desc: thisOperator[9].desc
-		//   }]
-		// })) {
-		//   const points = thisScript.findMultiColorEx('契灵_连线_推荐');
-		//   const regionsOfRecommend = thisOperator[9].oper.slice(0, 5) // 0 ~ 4为推荐的查找区域
-		//   const regionsOfSwipe = thisOperator[9].oper.slice(5, 10) // 5 ~ 9为连线的区域
-		//   const recommend = []; // 推荐数组
-		//   let can = []; // 建议数组
-		//   for (let i = 0; i < points.length; i++) {
-		//     const regionIndex = indexOfRegion(points[i], regionsOfRecommend);
-		//     if (regionIndex >= 0) {
-		//       recommend.push(regionIndex);
-		//     }
-		//   }
-
-		//   if ('优先推荐' === thisConf.line_sort) {
-		//     can = recommend;
-		//   } else if ('优先非推荐' === thisConf.line_sort) {
-		//     can = [0, 1, 2, 3, 4].filter(n => (recommend.indexOf(n) < 0));
-		//   }
-
-		//   // 能连的小于三个，从剩下的里面补
-		//   if (can.length < 3) {
-		//     const left = [0, 1, 2, 3, 4].filter(n => (can.indexOf(n) < 0));
-		//     while (can.length < 3) {
-		//       can.push(left.splice(random(0, left.length - 1), 1)[0]);
-		//     }
-		//   } else {
-		//     // 超过3个取3个
-		//     can = can.slice(0, 3);
-		//   }
-		//   // 连线
-		//   console.log(`连线：${can}`);
-		//   const toGesture = can.map(n => regionsOfSwipe[n]);
-		//   thisScript.helperBridge.regionGesture(toGesture, random(1500, 2500), thisScript.scheme.commonConfig.afterClickDelayRandom);
-		//   sleep(1000);
-		//   return true;
-		// }
-
-
-		const qilingIndex = parseInt((thisConf.summon_qiling as string).split(' ')[0], 10) - 1;
-		if (thisScript.oper({
-			id: 313,
-			name: '石头召唤确认',
-			operator: [{
-				desc: thisOperator[10].desc,
-				oper: [thisOperator[10].oper[qilingIndex], thisOperator[10].oper[4]]
-			}]
-		})) {
-			thisScript.global.qiling_Position = null;
-			return true;
-		}
-		return false;
+		// return false;
 	}
 }
-
-
-
-// /**
-//  * 返回point在第几个region里，如果都不在，返回-1
-//  * @param point
-//  * @param regions
-//  * @returns
-//  */
-// function indexOfRegion(point: { x: number, y: number }, regions: number[][]): number {
-//   const { x, y } = point;
-//   for (let i = 0; i < regions.length; i++) {
-//     const region = regions[i];
-//     if (x >= region[0] && x <= region[2] && y >= region[1] && y <= region[3]) {
-//       return i;
-//     }
-//   }
-//   return -1;
-// }

@@ -1,20 +1,128 @@
-import { IMultiDetectColorsOrigin } from "@/interface/IMultiColor";
+import { IMultiDetectColorsOrigin } from '@/interface/IMultiColor';
 
-const normal = -1; //定义常量
+// const normal = -1; //定义常量
 const left = 0;
 const center = 1;
 const right = 2;
 
 const multiDetectColors: IMultiDetectColorsOrigin = {
 	'准备界面_未准备': {
-		desc: [1280, 720,
+		desc: [
+			1280, 720,
 			[
-				[right, 1124, 698, 0xd0af86],
 				[right, 1240, 702, 0xcead83],
-				[right, 1191, 596, 0xa46149],
 				[right, 1182, 586, 0xf7e6c3],
 				[center, 360, 699, 0x241818],
-				[left, 32, 23, 0xdbb48b]
+				[left, 32, 23, 0xdbb48b],
+				[right, 1122, 698, 0xddbb8f],
+			]
+		]
+	},
+	'准备界面_未准备_简约': {
+		desc: [
+			1280, 720,
+			[
+				[right, 1240, 702, 0xcead83],
+				[right, 1182, 586, 0xf7e6c3],
+				[center, 360, 699, 0x241818],
+				[left, 32, 23, 0xdbb48b],
+				[right, 1122, 698, 0xddbb8f],
+			]
+		]
+	},
+	'准备界面_未准备_凛霜寒雪': {
+		desc: [
+			1280, 720,
+			[
+				[right, 1240, 702, 0xcead83],
+				[right, 1182, 586, 0xf7e6c3],
+				[center, 360, 699, 0x241818],
+				[left, 32, 23, 0xb8def6],
+				[right, 1122, 698, 0xddbb8f],
+			]
+		]
+	},
+	'准备界面_未准备_春缕含青': {
+		desc: [
+			1280, 720,
+			[
+				[right, 1240, 702, 0xcead83],
+				[right, 1182, 586, 0xf7e6c3],
+				[center, 360, 699, 0x241818],
+				[left, 32, 23, 0xffe4ac],
+				[right, 1122, 698, 0xddbb8f],
+			]
+		]
+	},
+	'准备界面_未准备_蝶寻花踪': {
+		desc: [
+			1280, 720,
+			[
+				[right, 1240, 702, 0xcead83],
+				[right, 1182, 586, 0xf7e6c3],
+				[center, 360, 699, 0x241818],
+				[left, 32, 23, 0xf3e0bb],
+				[right, 1122, 698, 0xddbb8f],
+			]
+		]
+	},
+	'准备界面_未准备_雅乐之邦': {
+		desc: [
+			1280, 720,
+			[
+				[right, 1240, 702, 0xcead83],
+				[right, 1182, 586, 0xf7e6c3],
+				[center, 360, 699, 0x241818],
+				[left, 32, 23, 0xdcca90],
+				[right, 1122, 698, 0xddbb8f],
+			]
+		]
+	},
+	'准备界面_未准备_莲华圣域': {
+		desc: [
+			1280, 720,
+			[
+				[right, 1240, 702, 0xcead83],
+				[right, 1182, 586, 0xf7e6c3],
+				[center, 360, 699, 0x241818],
+				[left, 32, 23, 0x928865],
+				[right, 1122, 698, 0xddbb8f],
+			]
+		]
+	},
+	'准备界面_未准备_笼梦之境': {
+		desc: [
+			1280, 720,
+			[
+				[right, 1240, 702, 0xcead83],
+				[right, 1182, 586, 0xf7e6c3],
+				[center, 360, 699, 0x241818],
+				[left, 32, 23, 0x8fcdff],
+				[right, 1122, 698, 0xddbb8f],
+			]
+		]
+	},
+	'准备界面_未准备_辰烁奇夜': {
+		desc: [
+			1280, 720,
+			[
+				[right, 1240, 702, 0xcead83],
+				[right, 1182, 586, 0xf7e6c3],
+				[center, 360, 699, 0x241818],
+				[left, 32, 23, 0xe1d591],
+				[right, 1122, 698, 0xddbb8f],
+			]
+		]
+	},
+	'准备界面_未准备_流焰蝶舞': {
+		desc: [
+			1280, 720,
+			[
+				[right, 1240, 702, 0xcead83],
+				[right, 1182, 586, 0xf7e6c3],
+				[center, 360, 699, 0x241818],
+				[left, 32, 23, 0xf9ad9b],
+				[right, 1122, 698, 0xddbb8f],
 			]
 		]
 	},
@@ -38,23 +146,131 @@ const multiDetectColors: IMultiDetectColorsOrigin = {
 				[left, 106, 24, 0xcfa375],
 				[right, 1270, 132, 0x48371f],
 				[right, 1270, 700, 0x241919],
-				[right, 1268, 80, 0x946430],
 				[right, 1266, 545, 0x573f26],
 			]
 		]
 	},
 	'战斗界面_手动状态': {
-		desc: [
-			1280, 720,
+		desc: [1280, 720,
 			[
 				[left, 34, 23, 0xdbb48b],
 				[left, 106, 24, 0xcfa375],
-				[right, 1270, 132, 0x48371f],
 				[right, 1270, 700, 0x241919],
-				[left, 46, 671, 0xefc9ab],
-				[left, 81, 670, 0xf0caac],
+				[right, 1270, 130, 0x422f1d],
+				[left, 48, 670, 0xeec8ab],
+				[left, 82, 669, 0xf0caac],
+				[left, 48, 661, 0xf0caac],
 			]
-		]
+		],
+	},
+	'战斗界面_手动状态_简约': {
+		desc: [1280, 720,
+			[
+				[left, 34, 23, 0xdbb48b],
+				[left, 106, 24, 0xcfa375],
+				[right, 1270, 700, 0x241919],
+				[right, 1270, 130, 0x422f1d],
+				[left, 48, 670, 0xeec8ab],
+				[left, 82, 669, 0xf0caac],
+				[left, 48, 661, 0xf0caac],
+			]
+		],
+	},
+	'战斗界面_手动状态_凛霜寒雪': {
+		desc: [1280, 720,
+			[
+				[left, 34, 23, 0xb9def6],
+				[left, 106, 24, 0xa6d2f2],
+				[right, 1270, 700, 0x769bc2],
+				[left, 48, 670, 0x2e639a],
+				[left, 82, 669, 0x4977a7],
+				[left, 48, 661, 0xbfd0e0],
+			]
+		],
+	},
+	'战斗界面_手动状态_春缕含青': {
+		desc: [1280, 720,
+			[
+				[left, 34, 23, 0xffe4ad],
+				[left, 106, 24, 0xffe8b9],
+				[right, 1270, 700, 0x5a4734],
+				[left, 48, 670, 0x655542],
+				[left, 82, 683, 0xc3b97d],
+				[left, 117, 614, 0xf8f4dc],
+			]
+		],
+	},
+	'战斗界面_手动状态_蝶寻花踪': {
+		desc: [1280, 720,
+			[
+				[left, 46, 671, 0xfde9e0],
+				[left, 117, 614, 0xfbe6dd],
+				[left, 78, 651, 0xf9e3da],
+				[left, 33, 25, 0xfff0c2],
+				[left, 106, 23, 0xfdf2cd],
+				[left, 92, 707, 0x306465],
+			]
+		],
+	},
+	'战斗界面_手动状态_雅乐之邦': {
+		desc: [1280, 720,
+			[
+				[left, 34, 25, 0xecd89c],
+				[left, 107, 25, 0xefdaa0],
+				[left, 46, 670, 0xfce8de],
+				[left, 25, 703, 0x426559],
+				[left, 117, 614, 0xfbe6dd],
+				[left, 63, 684, 0xcccca8],
+			]
+		],
+	},
+	'战斗界面_手动状态_莲华圣域': {
+		desc: [1280, 720,
+			[
+				[left, 37, 26, 0xd8b877],
+				[left, 108, 25, 0xdcbe83],
+				[left, 46, 670, 0xfbf2ce],
+				[left, 117, 614, 0xf9f1cd],
+				[left, 142, 710, 0x29364b],
+				[left, 81, 665, 0xf6edc9],
+			]
+		],
+	},
+	'战斗界面_手动状态_笼梦之境': {
+		desc: [1280, 720,
+			[
+				[left, 36, 24, 0x93ccff],
+				[left, 107, 24, 0x98cfff],
+				[left, 47, 661, 0xd5ebf6],
+				[left, 77, 657, 0xd9eff9],
+				[left, 117, 614, 0xd9eef9],
+				[left, 16, 701, 0x3f6984],
+			]
+		],
+	},
+	'战斗界面_手动状态_辰烁奇夜': {
+		desc: [1280, 720,
+			[
+				[left, 34, 25, 0xeadc98],
+				[left, 106, 25, 0xefdf9b],
+				[left, 47, 656, 0xfcf9e0],
+				[left, 78, 657, 0xfaf7df],
+				[left, 117, 614, 0xf7f3dd],
+				[left, 24, 705, 0x282b1f],
+			]
+		],
+	},
+	'战斗界面_手动状态_流焰蝶舞': {
+		desc: [1280, 720,
+			[
+				[left, 47, 656, 0xfcf9e0],
+				[left, 78, 657, 0xfaf7df],
+				[left, 117, 614, 0xf7f3dd],
+				[left, 36, 25, 0xf8a997],
+				[left, 107, 24, 0xf9ac9b],
+				[left, 24, 700, 0x8e594d],
+			]
+		],
 	},
 	'退出结算_左上角贪吃鬼': {
 		desc: [1280, 720,
@@ -111,7 +327,34 @@ const multiDetectColors: IMultiDetectColorsOrigin = {
 			]
 		]
 	},
-	'退出结算_邀请好友确认': {
+	'退出结算_取消确认框_未勾': {
+		desc: [1280, 720,
+			[
+				[center, 460, 258, 0xcbb59e],
+				[center, 799, 268, 0xcbb59e],
+				[center, 457, 433, 0xdf6851],
+				[right, 693, 430, 0xf3b25e],
+				[center, 641, 429, 0xcbb59e],
+				[center, 560, 356, 0x725f4d]
+			]
+		]
+	},
+	'退出结算_再次挑战_取消确认框_未勾': {
+		desc: [
+			1280, 720,
+			[
+				[center, 460, 258, 0xcbb59c],
+				[center, 799, 268, 0xcbb59c],
+				[center, 467, 429, 0xdf6851],
+				[center, 700, 431, 0xf3b25e],
+				[center, 641, 429, 0xcbb59c],
+				[center, 560, 356, 0x3f2e10],
+				[center, 541, 278, 0xcbb59c],
+				[center, 744, 280, 0xcbb59c],
+			]
+		]
+	},
+	'退出结算_取消确认框': {
 		desc: [1280, 720,
 			[
 				[center, 460, 258, 0xcbb59e],
@@ -209,15 +452,15 @@ const multiDetectColors: IMultiDetectColorsOrigin = {
 			[
 				[center, 448, 221, 0x684736],
 				[center, 829, 222, 0x654434],
-				[center, 705, 248, 0xcbb59e],
-				[center, 504, 408, 0xcbb59e],
-				[center, 762, 415, 0xcbb59e],
-				[center, 771, 352, 0xcbb59e],
-				[center, 519, 340, 0xcbb59e],
-				[center, 604, 411, 0xf4b25f],
-				[center, 684, 438, 0xf4b25f],
-				[center, 698, 446, 0x923d2c],
-				[center, 596, 493, 0x6d4c3b]
+				[center, 705, 248, 0xcbb59c],
+				[center, 504, 408, 0xdf6851],
+				[center, 762, 415, 0xf3b25e],
+				[center, 771, 352, 0xcbb59c],
+				[center, 519, 340, 0xcbb59c],
+				[center, 604, 411, 0xcbb59c],
+				[center, 684, 438, 0xf7bc63],
+				[center, 698, 446, 0xf1b562],
+				[center, 596, 493, 0x6c4a38],
 			]
 		]
 	},
@@ -285,50 +528,11 @@ const multiDetectColors: IMultiDetectColorsOrigin = {
 	'探索地图界面': {
 		desc: [1280, 720,
 			[
-				[left, 45, 60, 0xeff5fb],
-				[right, 1168, 146, 0xd9cec1],
-				[right, 1124, 32, 0xd7b388],
-				[right, 1226, 30, 0xd3af84],
-				[left, 18, 705, 0x754830],
-				[left, 210, 711, 0x985b32],
-			]
-		]
-	},
-	'庭院未打开菜单': {
-		desc: [1280, 720,
-			[
-				[right, 1211, 606, 0x885f46],
-				[right, 1205, 624, 0x987777],
-				[right, 1208, 646, 0xaf4949],
-				[right, 1175, 680, 0xb08e7d]
-			]
-		]
-	},
-	'探索章节_挑战': {
-		desc: [
-			1280, 720,
-			[
-				[center, 318, 417, 0xc7af95],
-				[center, 358, 133, 0x493625],
-				[center, 1046, 135, 0x64323b],
-				[center, 986, 539, 0xf3b25e],
-				[center, 1095, 545, 0xe5d2ab],
-				[center, 511, 562, 0xc7af94],
-				[center, 1109, 385, 0x633d21],
-			]
-		]
-	},
-	'探索章节_挑战2': {
-		desc: [
-			1280, 720,
-			[
-				[center, 289, 124, 0x493625],
-				[center, 1053, 125, 0x642d36],
-				[center, 990, 532, 0xf3b25e],
-				[center, 509, 552, 0xc7af94],
-				// [center, 346, 405, 0xc7af95],
-				[center, 1122, 419, 0x864e1f],
-				[center, 1101, 537, 0xebd9b3],
+				[left, 36, 36, 0xf7e3a5],
+				[left, 117, 26, 0xf7efb5],
+				[right, 1164, 25, 0xd6b289],
+				[right, 1223, 23, 0xd6ad86],
+				[center, 508, 35, 0x731c10],
 			]
 		]
 	},
@@ -348,29 +552,25 @@ const multiDetectColors: IMultiDetectColorsOrigin = {
 		desc: [
 			1280, 720,
 			[
-				[right, 1226, 47, 0xcda47a],
 				[right, 1228, 646, 0xd6c6c3],
 				[center, 366, 56, 0xf9cf9a],
-				[right, 1154, 40, 0xd7b288],
+				[right, 1154, 28, 0xd7b289],
+				[right, 1220, 25, 0xd3ae84],
 			]
 		],
 	},
 	'页面是否为庭院_菜单已展开_另一种图标_御祝图标_只支持默认庭院皮肤与默认装饰': {
-		desc: [
-			1280,
-			720,
+		desc: [1280, 720,
 			[
 				[right, 1223, 662, 0xdbcbc7],
-				[right, 1155, 41, 0xd7b188],
+				[right, 1155, 41, 0xcca375],
 				[center, 451, 631, 0xe8e4e1],
 				[center, 673, 651, 0xdb8b3f],
 			],
 		],
 	},
 	'庭院已打开菜单_另另外一种图标': {
-		desc: [
-			1280,
-			720,
+		desc: [1280, 720,
 			[
 				[right, 1223, 658, 0xdac9c4],
 				[right, 1155, 41, 0xd6b187],
@@ -378,6 +578,260 @@ const multiDetectColors: IMultiDetectColorsOrigin = {
 				[center, 683, 657, 0xda6b29],
 			],
 		],
+	},
+	'BUFF界面': {
+		desc: [
+			1280, 720,
+			[
+				[center, 342, 529, 0x828270],
+				[center, 938, 533, 0x6b715d],
+				[center, 371, 128, 0xd4c6bc],
+				[center, 908, 145, 0xddd0c6],
+				[center, 407, 534, 0x8e8b79],
+				[center, 371, 510, 0x868471],
+				[center, 913, 149, 0xddd0c6],
+			]
+		]
+	},
+	'斗技主界面': {
+		desc: [1280, 720,
+			[
+				[right, 1208, 178, 0x745845],
+				[right, 1202, 574, 0xd8c8a7],
+				[right, 1179, 602, 0x3c1e0c],
+				[right, 1202, 643, 0xe2cfa0],
+				[right, 1180, 624, 0xe2cca1],
+				[right, 1189, 626, 0x3c1e0c],
+				[center, 843, 290, 0x6e3926],
+				[center, 842, 288, 0x713a2a],
+			],
+		],
+	},
+	'斗技主界面_名士': {
+		desc: [
+			1280, 720,
+			[
+				[left, 35, 37, 0xf7e3a5],
+				[left, 115, 26, 0xf7eeb5],
+				[center, 576, 316, 0x1f509d],
+				[right, 674, 313, 0x1b57a4],
+				[center, 559, 403, 0x1861b5],
+				[right, 701, 401, 0x0d3a83],
+			]
+		],
+	},
+	'巅峰斗技主界面': {
+		desc: [1280, 720,
+			[
+				[right, 1232, 617, 0xd2bb90],
+				[right, 1189, 627, 0x3b1e0d],
+				[right, 714, 19, 0x6b3121],
+				[left, 36, 37, 0xf5e2a3],
+				[right, 1204, 66, 0xe3c298],
+			]
+		],
+	},
+	'巅峰斗技主界面_段位保护': {
+		desc: [1280, 720,
+			[
+				[right, 714, 19, 0x6b3121],
+				[left, 36, 37, 0xf5e2a3],
+				[right, 1204, 66, 0xe3c298],
+				[right, 1179, 594, 0x585a5d],
+				[right, 1203, 601, 0x565358],
+				[right, 1179, 624, 0xc6cbb9],
+				[left, 34, 36, 0xf7e9ab],
+			]
+		]
+	},
+	'巅峰斗技主界面_段位保护裂': {
+		desc: [1280, 720,
+			[
+				[right, 714, 19, 0x6b3121],
+				[left, 36, 37, 0xf5e2a3],
+				[right, 1204, 66, 0xe3c298],
+				[right, 1182, 574, 0xaeccda],
+				[right, 1162, 600, 0xaec8cd],
+				[right, 1179, 601, 0x657e90],
+				[right, 1180, 625, 0xb4cbcf],
+				[left, 34, 36, 0xf7e9ab],
+			]
+		],
+	},
+	'巅峰斗技主界面_名士': {
+		desc: [
+			1280, 720,
+			[
+				[right, 1204, 53, 0xe7cca4],
+				[left, 513, 45, 0xba4c2e],
+				[left, 773, 53, 0x593716],
+				[left, 208, 25, 0x593716],
+				[left, 46, 33, 0xf1db98],
+				[right, 1184, 637, 0x3b1e0d],
+				[right, 1183, 646, 0xe1cc9f],
+			]
+		]
+	},
+	'秘闻挑战开启': {
+		desc: [1280, 720,
+			[
+				[center, 379, 112, 0xf2edca],
+				[center, 372, 131, 0xe4cd9c],
+				[center, 371, 183, 0xc9a763],
+				[center, 531, 130, 0xe3caa1],
+				[center, 526, 180, 0xd3a863],
+				[center, 803, 150, 0xdbba80],
+				[center, 658, 156, 0xdcba77],
+				[center, 894, 186, 0xcda863],
+				[center, 797, 177, 0xd3a965]
+			]
+		]
+	},
+	'寮神社界面': {
+		desc: [
+			1280, 720,
+			[
+				[right, 1176, 171, 0x7f543d],
+				[right, 1219, 173, 0x7a5138],
+				[right, 1220, 292, 0x7b5239],
+				[right, 1176, 288, 0x855640],
+				[right, 1179, 414, 0xbb764a],
+				[right, 1218, 418, 0xbb7148],
+				[right, 1178, 540, 0x81553f],
+				[right, 1221, 536, 0x7c533a],
+				[right, 1200, 662, 0x791f1f],
+				[left, 46, 36, 0xeddc9a],
+				[left, 50, 20, 0xecd391],
+			]
+		]
+	},
+	'寮信息界面': {
+		desc: [
+			1280, 720,
+			[
+				[center, 733, 38, 0x593716],
+				[right, 1212, 171, 0xcc7c49],
+				[right, 1218, 279, 0x81533d],
+				[right, 1213, 415, 0x744a36],
+				[right, 1216, 536, 0x764b37],
+				[center, 979, 663, 0x29140e],
+				[center, 1090, 663, 0xbbb190],
+			]
+		]
+	},
+	'式神录': {
+		desc: [
+			1280, 720,
+			[
+				[left, 26, 12, 0x443028],
+				[left, 35, 27, 0xf7e9ab],
+				[left, 59, 27, 0x624532],
+				[left, 114, 15, 0xaf8c56],
+				[left, 155, 24, 0xaf8c56],
+				[left, 211, 20, 0x382720],
+			]
+		]
+	},
+	'结界卡超上限提示': {
+		desc: [
+			1280, 720,
+			[
+				[center, 443, 223, 0x704c3b],
+				[center, 839, 227, 0x4c3023],
+				[center, 551, 361, 0x402f11],
+				[center, 456, 418, 0xdf6851],
+				[center, 686, 440, 0xf3b25e],
+				[center, 849, 387, 0xcbb59c],
+				[center, 853, 306, 0xcbb59c],
+				[center, 462, 297, 0xcbb59c],
+				[center, 848, 268, 0xcbb59c],
+				[center, 454, 495, 0x6c4937],
+				[center, 650, 285, 0xcbb59c],
+			]
+		],
+	},
+	'式神拓展包弹窗': {
+		desc: [
+			1280, 720,
+			[
+				[center, 435, 457, 0xde6952],
+				[center, 530, 484, 0xde6952],
+				[right, 747, 451, 0xf4b25d],
+				[right, 841, 483, 0xf4b25d],
+				[center, 378, 174, 0x6b4539],
+				[right, 913, 535, 0x634131],
+			]
+		]
+	},
+	'组队大厅': {
+		desc: [
+			1280, 720,
+			[
+				[left, 42, 38, 0xf7e5a7],
+				[left, 48, 490, 0x3e2822],
+				[right, 1252, 632, 0x4a3024],
+				[right, 1221, 667, 0x3c221f],
+			]
+		]
+	},
+	'组队大厅_自动匹配': {
+		desc: [1280, 720,
+			[
+				[center, 840, 143, 0xd7c8ba],
+				[center, 623, 620, 0xccbbaa],
+				[center, 721, 625, 0xf4b25f],
+				[center, 446, 625, 0xf3b25e],
+				[center, 722, 156, 0xdbcdc4],
+				[center, 1134, 98, 0x482f28]
+			]
+		]
+	},
+	'组队大厅_创建队伍': {
+		desc: [
+			1280, 720,
+			[
+				[center, 377, 143, 0x5e4030],
+				[center, 890, 143, 0x644434],
+				[center, 401, 572, 0x5d4030],
+				[center, 882, 573, 0x684635],
+				[center, 629, 515, 0xf3b25e],
+			]
+		],
+	},
+	'组队大厅_选择副本类型_创建队伍': {
+		desc: [
+			1280, 720,
+			[
+				[left, 228, 62, 0xec859d],
+				[center, 398, 66, 0x684a3b],
+				[center, 402, 584, 0xdf6851],
+				[center, 877, 590, 0xf3b25e],
+			]
+		]
+	},
+	'常驻悬浮窗方案': {
+		desc: [
+			1280, 720,
+			[
+				[left, -1, -1, 0x000000],
+				[left, -1, -1, 0x000000],
+				[left, -1, -1, 0x000000],
+				[left, -1, -1, 0x000000],
+			]
+		]
+	},
+	'町中': {
+		desc: [
+			1280, 720,
+			[
+				[right, 1053, 441, 0x8c8888],
+				[right, 1096, 229, 0xa8a196],
+				[right, 1155, 38, 0xd7b28a],
+				[right, 1153, 27, 0xd9b489],
+				[right, 1216, 26, 0xd4ae84],
+			]
+		]
+
 	}
 };
 

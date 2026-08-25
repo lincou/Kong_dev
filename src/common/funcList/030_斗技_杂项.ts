@@ -1,316 +1,337 @@
 import {
-  IFuncOrigin,
-  IFuncOperatorOrigin,
-  IFuncOperator,
+	IFuncOrigin,
+	IFuncOperatorOrigin,
+	IFuncOperator,
 } from '@/interface/IFunc';
 import { Script } from '@/system/script';
-const normal = -1; //定义常量
+// const normal = -1; //定义常量
 const left = 0;
 const center = 1;
 const right = 2;
 
 export class Func030 implements IFuncOrigin {
-  id = 30;
-  name = '斗技_杂项';
-  desc = '斗技界面点击“战”按钮，自动跳过段位提升等';
-  config = [
-    {
-      desc: '',
-      config: [
-        {
-          name: 'level',
-          desc: '达到指定段位停止运行(只支持向上选择,比如:当前段位七段,选择了五段为错误行为)',
-          type: 'list',
-          data: ['名士', '四段', '五段', '九段'],
-          default: '名士',
-        },
-      ],
-    },
-  ];
-  operator: IFuncOperatorOrigin[] = [
-    {
-      // 0 检测_斗技主界面
-      desc: [
-        1280,
-        720,
-        [
-          // [left, 36, 25, 0xf7e8a9],  // 图裂识别容错
-          [right, 1210, 82, 0x725942],
-          [right, 1208, 178, 0x745845],
-          [right, 1202, 574, 0xd8c8a7],
-          [right, 1179, 602, 0x3c1e0c],
-          [right, 1202, 643, 0xe2cfa0],
-          [right, 1180, 624, 0xe2cca1],
-          [right, 1189, 626, 0x3c1e0c],
-          [center, 843, 290, 0x6e3926], // 阵容按钮
-          [center, 832, 292, 0xfaeabe], // 阵容按钮
-        ],
-      ],
-      oper: [[right, 1280, 720, 1166, 580, 1232, 638, 1000]],
-    },
-    {
-      // 1 有段位保护
-      desc: [
-        1280,
-        720,
-        [
-          // [left, 37, 25, 0xf6e6a7],  // 图裂识别容错
-          [left, 207, 26, 0x583716],
-          [right, 1206, 74, 0x745a45],
-          [right, 1206, 178, 0x745a44],
-          [right, 1179, 594, 0x585a5d],
-          [right, 1203, 601, 0x565358],
-          [right, 1179, 624, 0xc6cbb9],
-        ],
-      ],
-      oper: [[right, 1280, 720, 1166, 580, 1232, 638, 1000]],
-    },
-    {
-      // 2 有裂痕的段位保护
-      desc: [
-        1280,
-        720,
-        [
-          // [left, 37, 25, 0xf6e6a7],  // 图裂识别容错
-          [left, 207, 26, 0x583716],
-          [right, 1206, 74, 0x745a45],
-          [right, 1206, 178, 0x745a44],
-          [right, 1182, 574, 0xaeccda],
-          [right, 1162, 600, 0xaec8cd],
-          [right, 1179, 601, 0x657e90],
-          [right, 1180, 625, 0xb4cbcf],
-        ],
-      ],
-      oper: [[right, 1280, 720, 1166, 580, 1232, 638, 1000]],
-    },
-    {
-      // 3 段位上升
-      desc: [
-        1280,
-        720,
-        [
-          [center, 424, 329, 0xaa8957],
-          [center, 579, 298, 0xe6d8a9],
-          [center, 738, 382, 0xb6261c],
-          [center, 774, 293, 0xf3e5ba],
-          [center, 774, 332, 0x967742],
-          [center, 869, 325, 0x9d824c],
-        ],
-      ],
-      oper: [[right, 1280, 720, 1166, 580, 1232, 638, 1000]],
-    },
-    {
-      // 4 自动上阵
-      desc: [
-        1280,
-        720,
-        [
-          [center, 614, 60, 0x1c100c],
-          [center, 628, 58, 0xfff1cf],
-          [center, 666, 56, 0x190f0c],
-          [left, 34, 143, 0x826851],
-          [left, 44, 149, 0xffffff],
-          [left, 60, 158, 0x826851],
-          [left, 69, 512, 0x423141],
-          [right, 1166, 532, 0xd5bb9d],
-        ],
-      ],
-      oper: [[left, 1280, 720, 44, 139, 77, 178, 1000]],
-    },
-    {
-      // 5,斗技界面
-      desc: [
-        1280,
-        720,
-        [
-          // [left, 36, 28, 0xf5eaab],  // 图裂识别容错
-          [left, 221, 28, 0x583716],
-          [right, 1207, 87, 0x725844],
-          [right, 1204, 185, 0x735943],
-        ],
-      ],
-    },
-    {
-      //6,五段
-      desc: [
-        1280,
-        720,
-        [
-          [center, 598, 344, 0x201b1c],
-          [center, 635, 366, 0xcfcecb],
-          [center, 675, 344, 0x282121],
-          [center, 614, 427, 0xf9eec9],
-          [center, 611, 452, 0xf9eec9],
-        ],
-      ],
-    },
-    {
-      //7,九段
-      desc: [
-        1280,
-        720,
-        [
-          [center, 598, 344, 0xcf9432],
-          [center, 638, 354, 0x8e5b9f],
-          [center, 679, 348, 0xd09633],
-          [center, 611, 432, 0xf9eec9],
-          [center, 612, 421, 0x894212],
-        ],
-      ],
-    },
-    {
-      //8,四段
-      desc: [
-        1280,
-        720,
-        [
-          [center, 599, 342, 0x695649],
-          [center, 639, 366, 0xd1cecb],
-          [center, 673, 346, 0x69544b],
-          [center, 612, 428, 0xf0e0ba],
-          [center, 614, 444, 0x894212],
-        ],
-      ],
-    },
-    {
-      //9,八段
-      desc: [
-        1280,
-        720,
-        [
-          [center, 601, 345, 0x200204],
-          [center, 638, 370, 0xbd7924],
-          [center, 679, 348, 0x200204],
-          [center, 602, 441, 0xf9eec9],
-          [center, 623, 440, 0xf9eec9],
-        ],
-      ],
-    },
-    {
-      // 10 适配支持逐原之争
-      desc: [
-        1280,
-        720,
-        [
-          [left, 36, 24, 0xf7eaab],
-          [right, 1208, 81, 0x90685c],
-          [right, 1228, 621, 0xd6c095],
-          [right, 1203, 602, 0x3b1e0d],
-          [right, 974, 640, 0xc9a87b],
-          [center, 798, 40, 0x593615],
-        ],
-      ],
-      oper: [[center, 1280, 720, 1153, 572, 1243, 663, 1000]],
-    },
-  ];
-  operatorFunc(thisScript: Script, thisOperator: IFuncOperator[]): boolean {
-    let thisconf = thisScript.scheme.config['30'];
-    if (
-      thisconf &&
-      thisconf.level &&
-      thisScript.oper({
-        id: 30,
-        name: '斗技_杂项',
-        operator: [
-          {
-            desc: thisOperator[5].desc,
-          },
-        ],
-      })
-    ) {
-      switch (thisconf.level) {
-        case '名士':
-          break;
-        case '五段':
-          if (
-            thisScript.oper({
-              id: 30,
-              name: '斗技_五段',
-              operator: [thisOperator[6]],
-            })
-          ) {
-            thisScript.doPush(thisScript, {
-              text: '已达到段位，请查看。',
-              before() {
-                thisScript.myToast('脚本即将停止，正在上传数据');
-              },
-            });
-            thisScript.stop();
-            return true;
-          }
-          break;
-        case '九段':
-          if (
-            thisScript.oper({
-              id: 30,
-              name: '斗技_九段',
-              operator: [thisOperator[7]],
-            })
-          ) {
-            thisScript.doPush(thisScript, {
-              text: '已达到段位，请查看。',
-              before() {
-                thisScript.myToast('脚本即将停止，正在上传数据');
-              },
-            });
-            thisScript.stop();
-            return true;
-          }
-          break;
-        case '四段':
-          if (
-            thisScript.oper({
-              id: 30,
-              name: '斗技_四段',
-              operator: [thisOperator[8]],
-            })
-          ) {
-            thisScript.doPush(thisScript, {
-              text: '已达到段位，请查看。',
-              before() {
-                thisScript.myToast('脚本即将停止，正在上传数据');
-              },
-            });
-            thisScript.stop();
-            return true;
-          }
-          break;
-        case '八段':
-          if (
-            thisScript.oper({
-              id: 30,
-              name: '斗技_八段',
-              operator: [thisOperator[9]],
-            })
-          ) {
-            thisScript.doPush(thisScript, {
-              text: '已达到段位，请查看。',
-              before() {
-                thisScript.myToast('脚本即将停止，正在上传数据');
-              },
-            });
-            thisScript.stop();
-            return true;
-          }
-          break;
-      }
-    }
-
-    if (
-      thisScript.oper({
-        id: 30,
-        name: '斗技_杂项',
-        operator: [
-          thisOperator[0],
-          thisOperator[1],
-          thisOperator[2],
-          thisOperator[3],
-          thisOperator[4],
-          thisOperator[10],
-        ],
-      })
-    ) {
-      return true;
-    }
-  }
+	id = 30;
+	name = '斗技_杂项';
+	desc = '斗技界面点击“战”按钮，自动跳过段位提升等';
+	config = [{
+		desc: '',
+		config: [{
+			name: 'isKnowledgePvP',
+			desc: '是否名仕局',
+			type: 'switch',
+			default: false,
+		}, {
+			name: 'banList',
+			desc: '式神被ban时退出，输入单字简称，现仅支持“面龙辉犬狐,言追桃平驴”',
+			type: 'text',
+			default: '',
+		}, {
+			name: 'ledgeProPvP',
+			desc: '大名仕停止斗技',
+			type: 'switch',
+			default: false,
+		}],
+	}];
+	operator: IFuncOperatorOrigin[] = [{
+		// 0 检测_斗技主界面
+		desc: '斗技主界面',
+		oper: [[right, 1280, 720, 1166, 580, 1232, 638, 1000]],
+	}, {
+		// 1 有段位保护
+		desc: [1280, 720,
+			[
+				[right, 1179, 594, 0x585a5d],
+				[right, 1203, 601, 0x565358],
+				[right, 1179, 624, 0xc6cbb9],
+				[left, 34, 36, 0xf7e9ab],
+			],
+		],
+		oper: [[right, 1280, 720, 1166, 580, 1232, 638, 1000]],
+	}, {
+		// 2 有裂痕的段位保护
+		desc: [1280, 720,
+			[
+				[right, 1182, 574, 0xaeccda],
+				[right, 1162, 600, 0xaec8cd],
+				[right, 1179, 601, 0x657e90],
+				[right, 1180, 625, 0xb4cbcf],
+				[left, 34, 36, 0xf7e9ab],
+			],
+		],
+		oper: [[right, 1280, 720, 1166, 580, 1232, 638, 1000]],
+	}, {
+		// 3 段位上升
+		desc: [1280, 720,
+			[
+				[center, 496, 62, 0x9f462a],
+				[right, 806, 78, 0x8b2e1d],
+				[center, 518, 57, 0xf5d5aa],
+				[right, 760, 39, 0xf9d8ac],
+				[center, 470, 570, 0x31281d],
+			],
+		],
+		oper: [[right, 1280, 720, 1178, 32, 1227, 77, 1000]],
+	}, {	// 4 自动上阵
+		desc: [1280, 720,
+			[
+				[center, 480, 43, 0x1f2e5c],
+				[right, 810, 55, 0x511415],
+				[right, 645, 59, 0xfdf3d4],
+				[right, 837, 709, 0x4a3522],
+				[left, 255, 702, 0x4b2f21],
+				[left, 66, 528, 0x413530],
+				[left, 48, 31, 0xd6c4a1],
+				[right, 1012, 701, 0x391c12],
+				[right, 1216, 607, 0xd6bf8f],	//	根据右下角判断是否自动上阵
+			]
+		],
+		oper: [
+			[center, 1280, 720, 12, 109, 89, 177, 1000],
+		]
+	}, { // 5 名仕斗技界面
+		desc: '斗技主界面_名士',
+		oper: [
+			[center, 1280, 720, 1145, 575, 1245, 664, 1000],
+		]
+	}, { // 6 禁选界面
+		desc: [
+			1280, 720,
+			[
+				[right, 1159, 607, 0x381e0d],
+				[right, 1152, 588, 0x381e0d],
+				[right, 1163, 589, 0x381e0d],
+				[right, 1198, 598, 0x381e0d],
+				[right, 1200, 617, 0x381e0d],
+				[right, 1175, 613, 0xdecb9c],
+				[right, 1173, 588, 0xd9c49c],
+			]
+		],
+		oper: [
+			[center, 1280, 720, 1100, 523, 1241, 653, 1000],
+		]
+	}, { // 7 巅峰斗技
+		desc: '巅峰斗技主界面',
+		oper: [
+			[center, 1280, 720, 1167, 590, 1243, 659, 1000],
+		]
+	}, { // 8 巅峰斗技
+		desc: '巅峰斗技主界面_段位保护',
+		oper: [
+			[center, 1280, 720, 1167, 590, 1243, 659, 1000],
+		]
+	}, { // 9 巅峰斗技
+		desc: '巅峰斗技主界面_段位保护裂',
+		oper: [
+			[center, 1280, 720, 1167, 590, 1243, 659, 1000],
+		]
+	}, { // 10 巅峰斗技
+		desc: '巅峰斗技主界面_名士',
+		oper: [
+			[center, 1280, 720, 1167, 590, 1243, 659, 1000],
+		]
+	}, { // 11 退出
+		desc: [
+			1280, 720,
+			[
+				[center, 625, 15, 0x342c27],
+				[right, 661, 15, 0x352c26],
+				[right, 646, 37, 0x312114],
+				[right, 641, 99, 0x291f17],
+				[center, 601, 67, 0x8a7b5a],
+				[right, 680, 66, 0x8a795a],
+			]
+		],
+		oper: [
+			[left, 1280, 720, 22, 19, 52, 47, 1500], // 左上角返回
+			[center, 1280, 720, 683, 401, 795, 442, 500], // 确认
+		]
+	}, { // 12 自动上阵
+		desc: [
+			1280, 720,
+			[
+				[center, 614, 60, 0x1c100c],
+				[center, 628, 58, 0xfff1cf],
+				[center, 666, 56, 0x190f0c],
+				[left, 34, 143, 0x826851],
+				[left, 44, 149, 0xffffff],
+				[left, 60, 158, 0x826851],
+				[right, 1166, 532, 0xd5bb9d],
+				[left, 49, 181, 0xffffff],
+				[left, 65, 145, 0xffffff],
+			]
+		],
+		oper: [[left, 1280, 720, 44, 139, 77, 178, 1000]],
+	}, { // 13 通用段位战斗
+		desc: [
+			1280, 720,
+			[
+				[left, 38, 25, 0xf5e5a5],
+				[left, 48, 14, 0xefd390],
+				[left, 206, 30, 0x593716],
+				[left, 224, 30, 0x593716],
+				[right, 1192, 106, 0x6f533c],
+				[right, 1193, 205, 0x6b5038],
+			]
+		],
+		oper: [
+			[center, 1280, 720, 1153, 590, 1244, 644, 1000],
+		]
+	}, { // 14 大名士_第一种(防止火焰遮挡)
+		desc: [
+			1280, 720,
+			[
+				[center, 640, 365, 0x936493],
+				[center, 643, 378, 0xffec6b],
+				[center, 595, 354, 0x754013],
+				[center, 683, 356, 0x754013],
+			]
+		],
+		oper: [
+			[center, 1280, 720, 26, 8, 59, 44, 1000],
+		]
+	}, { // 15 大名士_第二种(防止火焰遮挡)
+		desc: [1280, 720,
+			[
+				[center, 610, 430, 0xd5a050],
+				[center, 626, 442, 0x9a682e],
+				[right, 660, 448, 0x98692e],
+				[right, 667, 429, 0xcf9b4e],
+			]
+		],
+		oper: [
+			[center, 1280, 720, 26, 8, 59, 44, 1000],
+		]
+	}, { // 16 页面是否为庭院(菜单未展开) 只支持默认庭院皮肤与默认装饰
+		desc: '页面是否为庭院_菜单未展开_只支持默认庭院皮肤与默认装饰',
+		oper: [
+			[left, 1280, 720, 0, 0, 20, 20, 1000]
+		]
+	}, { // 17 页面是否为庭院(菜单已展开) 只支持默认庭院皮肤与默认装饰
+		desc: '页面是否为庭院_菜单已展开_只支持默认庭院皮肤与默认装饰',
+	}, {	// 18 检测_町中
+		desc: '町中',
+		oper: [
+			[center, 1280, 720, 757, 149, 799, 198, 1200]	//	点击斗技灯笼
+		]
+	}, { // 19 淘汰赛
+		desc: [1280, 720,
+			[
+				[center, 619, 540, 0xefc784],
+				[right, 640, 537, 0xefc384],
+				[right, 677, 541, 0xefc784],
+				[right, 717, 539, 0x843c29],
+				[right, 771, 592, 0x5f3827],
+			]
+		]
+	}, {
+		// 20 寻龙逐英斗技主界面
+		desc: [1280, 720,
+			[
+				[right, 1232, 617, 0xd3bc8d],
+				[right, 1189, 627, 0x3a1d0d],
+				[right, 708, 19, 0x253834],
+				[left, 36, 37, 0xf5e2a3],
+				[right, 1204, 66, 0x745844],
+			]
+		],
+		oper: [
+			[center, 1280, 720, 1167, 590, 1243, 659, 1000],
+		]
+	}];
+	operatorFunc(thisScript: Script, thisOperator: IFuncOperator[]): boolean {
+		const thisconf = thisScript.scheme.config['30'];
+		if (thisconf.ledgeProPvP) {
+			if (thisScript.oper({
+				id: 30,
+				name: '斗技_杂项',
+				operator: [thisOperator[14], thisOperator[15]]
+			})) {
+				thisScript.doPush(thisScript, { text: '已大名士，停止斗技。', before() { thisScript.myToast('脚本即将停止，正在上传数据'); } });
+				thisScript.stop();
+				sleep(3000);
+				return true;
+			}
+		}
+		if (thisScript.oper({
+			id: 30,
+			name: '斗技_杂项',
+			operator: [thisOperator[4]]
+		})) {
+			if (thisScript.global.redFlag) {
+				thisScript.global.redFlag = false;
+			}
+			return true;
+		}
+		if (thisScript.oper({
+			id: 30,
+			name: '斗技_杂项',
+			operator: [
+				thisOperator[0], thisOperator[1], thisOperator[2], thisOperator[3],
+				thisOperator[6], thisOperator[7], thisOperator[8], thisOperator[9],
+				thisOperator[12], thisOperator[13], thisOperator[20],
+			]
+		})) {
+			return true;
+		}
+		if (thisconf.isKnowledgePvP) {
+			if (thisScript.oper({
+				id: 30,
+				name: '斗技_淘汰赛',
+				operator: [thisOperator[19]]
+			})) {
+				const point = thisScript.findMultiColorEx('淘汰赛_败')
+				if (point?.length > 1) {
+					thisScript.doPush(thisScript, { text: '已二败，停止斗技。', before() { thisScript.myToast('脚本即将停止，正在上传数据'); } });
+					thisScript.stop();
+					sleep(3000);
+					return true;
+				}
+			}
+			if (thisScript.oper({
+				id: 30,
+				name: '斗技_杂项_名仕',
+				operator: [thisOperator[5], thisOperator[10]]
+			})) {
+				return true;
+			}
+			if (thisScript.oper({
+				name: '斗技_杂项_ban位',
+				operator: [{ desc: thisOperator[11].desc }],
+			}) && typeof thisconf.banList === 'string') {
+				for (let i = 0; i < thisconf.banList.length; i++) {
+					if (thisScript.findMultiColor(`斗技ban选_${thisconf.banList[i]}`)) {
+						return thisScript.oper({
+							id: 30,
+							name: '斗技_杂项_禁选',
+							operator: [{ oper: thisOperator[11].oper }],
+						})
+					}
+				}
+			}
+		}
+		if (thisScript.oper({
+			name: '庭院判断',
+			operator: [{
+				desc: thisOperator[16].desc
+			}, {
+				desc: thisOperator[17].desc
+			}]
+		})) {
+			const point = thisScript.findMultiColor('庭院_町中竖牌');
+			if (point) {
+				const oper = [
+					[point.x, point.y, point.x + 5, point.y + 5, 1000]
+				];
+				thisScript.regionClick(oper);
+				sleep(2000);
+				return true;
+			}
+		}
+		if (thisScript.oper({
+			name: '町中_斗技灯笼',
+			operator: [thisOperator[18]]
+		})) {
+			return true;
+		}
+	}
 }

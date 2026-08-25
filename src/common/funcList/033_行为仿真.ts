@@ -1,9 +1,9 @@
 import { IFuncOrigin, IFuncOperatorOrigin, IFuncOperator } from '@/interface/IFunc';
 import { Script } from '@/system/script';
-const normal = -1; //定义常量
+// const normal = -1; //定义常量
 const left = 0;
 const center = 1;
-const right = 2;
+// const right = 2;
 
 export class Func033 implements IFuncOrigin {
 	id = 33;
@@ -44,10 +44,10 @@ export class Func033 implements IFuncOrigin {
 		// 公频聊天，关闭
 		desc: [1280, 720,
 			[[left, 48, 39, 0x917057],
-			[left, 655, 323, 0x4e3925],
-			[left, 532, 659, 0xf4b25f],
-			[left, 656, 357, 0xc1af8e],
-			[left, 634, 249, 0x625140]]
+				[left, 655, 323, 0x4e3925],
+				[left, 532, 659, 0xf4b25f],
+				[left, 656, 357, 0xc1af8e],
+				[left, 634, 249, 0x625140]]
 		],
 		oper: [
 			[left, 1280, 720, 640, 318, 672, 398, 1000],
@@ -56,10 +56,10 @@ export class Func033 implements IFuncOrigin {
 		// 好友聊天，关闭
 		desc: [1280, 720,
 			[[center, 707, 65, 0x5d3c1c],
-			[center, 908, 148, 0xc7bfb2],
-			[center, 1180, 99, 0x65313b],
-			[center, 966, 618, 0xd0af87],
-			[center, 524, 647, 0xb3a79d]]
+				[center, 908, 148, 0xc7bfb2],
+				[center, 1180, 99, 0x65313b],
+				[center, 966, 618, 0xd0af87],
+				[center, 524, 647, 0xb3a79d]]
 		],
 		oper: [
 			[center, 1280, 720, 1160, 96, 1200, 130, 1000],
@@ -89,6 +89,7 @@ export class Func033 implements IFuncOrigin {
 					// 点击存在红点的频道
 					let point = null;
 					thisScript.keepScreen(true);
+					// eslint-disable-next-line no-cond-assign
 					while (point = thisScript.findMultiColor('公频聊天_未读红点')) {
 						const oper = [[point.x, point.y, point.x + thisOperator[0].oper[6][2], point.y + thisOperator[0].oper[6][3], thisOperator[0].oper[6][4]]];
 						thisScript.regionClick(oper, 1000 + +thisScript.scheme.commonConfig.afterClickDelayRandom);

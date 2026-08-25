@@ -1,9 +1,9 @@
 import { IFuncOrigin, IFuncOperatorOrigin, IFuncOperator } from '@/interface/IFunc';
 import { Script } from '@/system/script';
-const normal = -1; //定义常量
+// const normal = -1; //定义常量
 const left = 0;
 const center = 1;
-const right = 2;
+// const right = 2;
 
 export class Func040 implements IFuncOrigin {
 	id = 40;
@@ -19,7 +19,7 @@ export class Func040 implements IFuncOrigin {
 			name: 'next_scheme',
 			desc: '下一个方案',
 			type: 'scheme',
-			default: '寮突破',
+			default: '返回庭院',
 		}]
 	}, {
 		desc: '准备界面下关闭buff',
@@ -31,18 +31,8 @@ export class Func040 implements IFuncOrigin {
 		}]
 	}];
 	operator: IFuncOperatorOrigin[] = [{
-		// 0 buff界面
-		desc: [1280, 720,
-			[
-				[center, 352, 526, 0x9c977e],
-				[center, 933, 526, 0x747865],
-				[center, 848, 528, 0xb89e7c],
-				[center, 497, 522, 0x9e9d8c],
-				[center, 363, 120, 0xd4c4bb],
-				[center, 913, 121, 0xd8c7bf],
-				[center, 878, 124, 0xdfd4cb]
-			]
-		],
+		// 0 已适配66 buff界面
+		desc: 'BUFF界面',
 		oper: [
 			[center, 1280, 720, 0, 0, 855 - 782, 431 - 415, 2000],
 			[center, 1280, 720, 110, 120, 338, 549, 500],
@@ -57,13 +47,15 @@ export class Func040 implements IFuncOrigin {
 	operatorFunc(thisScript: Script, thisOperator: IFuncOperator[]): boolean {
 		const thisconf = thisScript.scheme.config['40'];
 		if (thisScript.oper({
+			id: 40,
 			name: 'BUFF界面',
 			operator: [{
 				desc: thisOperator[0].desc
 			}]
 		})) {
+			thisScript.global.closed_buff = true;
 			// 金币妖怪_判断挑战次数是否用完
-			let point = thisScript.findMultiColor('开启的BUFF') || null
+			const point = thisScript.findMultiColor('开启的BUFF') || null
 			if (point) {
 				thisScript.regionClick([
 					[point.x, point.y, point.x + thisOperator[0].oper[0][2], point.y + thisOperator[0].oper[0][3], 1000]
@@ -71,15 +63,34 @@ export class Func040 implements IFuncOrigin {
 				return true
 			} else {
 				thisScript.regionClick([thisOperator[0].oper[1]]);
+				let next_scheme = thisScript.runtimeParams && thisScript.runtimeParams.next_scheme_name;
+				if (!next_scheme) {
+					next_scheme = thisScript.superGlobal.next_scheme_name;
+					thisScript.superGlobal.next_scheme_name = null;
+				}
 				if (thisconf && thisconf.scheme_switch_enabled) {
-					thisScript.rerun(thisconf.next_scheme);
-					sleep(3000);
-				} else {
-					thisScript.doPush(thisScript, { text: `[${thisScript.schemeHistory.map(item => item.schemeName).join('、')}]已停止，请查看。`, before() { thisScript.myToast('脚本即将停止，正在上传数据'); } });
-					thisScript.stop();
+					next_scheme = thisconf.next_scheme as string;
 					sleep(3000);
 				}
-				return false
+				if (!next_scheme) {
+					if ('停止脚本' === thisconf.afterCountOper) {
+						thisScript.doPush(thisScript, { text: `[${thisScript.schemeHistory.map(item => item.schemeName).join('、')}]已停止，请查看。`, before() { thisScript.myToast('脚本即将停止，正在上传数据'); } });
+						thisScript.stop();
+					} else if ('关闭应用' === thisconf.afterCountOper) {
+						sleep(1000);
+						const packageNames = thisScript.stopRelatedApp();
+						thisScript.doPush(thisScript, { text: `[${thisScript.schemeHistory.map(item => item.schemeName).join('、')}]已停止，应用[${packageNames}]已杀，请查看。`, before() { thisScript.myToast('脚本即将停止，正在上传数据'); } });
+						sleep(2000);
+						thisScript.stop();
+					}
+					return true;
+				} else {
+					sleep(1000);
+					thisScript.rerun(next_scheme, {
+						...thisScript.runtimeParams,
+					});
+					return true;
+				}
 			}
 		}
 

@@ -1,18 +1,17 @@
-import { Script } from "@/system/script";
-
+import { Script } from '@/system/script';
 export interface IFuncConfigOrigin {
 	desc: string;
 	config: Array<{
 		name: string,
 		desc: string,
 		// TODO 修改为枚举类型
-		type: string, // 'switch' | 'integer' | 'text' | 'scheme' | 'list',
-		default: boolean | string | number
+		type: string, // 'switch' | 'integer' | 'text' | 'scheme' | 'list'| 'lists',
+		default: boolean | string | number | string[]
 	}>
 }
 
 export interface IFuncOperatorOrigin {
-	desc?: [number, number, 
+	desc?: [number, number,
 		[number, number, number, number][]
 	] | string; // 如果是string的话表示从multiDetectColors.ts里面引用
 	oper?: [number, number, number, number, number, number, number, number][];
